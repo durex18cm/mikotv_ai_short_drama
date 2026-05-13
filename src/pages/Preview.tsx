@@ -128,7 +128,7 @@ export function Preview() {
                 'px-3 py-1.5 rounded-md text-xs font-medium transition-all',
                 selectedEpId === ep.id
                   ? 'bg-[#E91E63]/20 text-[#F48FB1]'
-                  : 'text-[#b8b8cc] hover:text-[#d8d8ec]'
+                  : 'text-[#B4B7BE] hover:text-[#D2D5DB]'
               )}
             >
               第 {ep.num} 集 · {ep.title}
@@ -154,15 +154,15 @@ export function Preview() {
                   exit={{ opacity: 0, y: 8, height: 0 }}
                   className="w-full max-w-[520px] overflow-hidden"
                 >
-                  <div className="bg-[#111128] border border-[#EC407A]/20 rounded-2xl p-5">
+                  <div className="bg-[#12151C] border border-[#EC407A]/20 rounded-2xl p-5">
                     <div className="flex items-center justify-between mb-4">
                       <div>
-                        <p className="text-xs font-semibold text-[#ededff]">
+                        <p className="text-xs font-semibold text-[#EDEEF0]">
                           局部修改 · SHOT {String(selectedShot.num).padStart(2, '0')}
                         </p>
-                        <p className="text-[12px] text-[#b8b8cc] mt-0.5 line-clamp-1">{selectedShot.description}</p>
+                        <p className="text-[12px] text-[#B4B7BE] mt-0.5 line-clamp-1">{selectedShot.description}</p>
                       </div>
-                      <button onClick={() => { setSelectedShot(null); void 0 }} className="text-[#ababc8] hover:text-[#d8d8ec] text-[13px]">
+                      <button onClick={() => { setSelectedShot(null); void 0 }} className="text-[#8B8E96] hover:text-[#D2D5DB] text-[13px]">
                         取消
                       </button>
                     </div>
@@ -187,7 +187,7 @@ export function Preview() {
                           className="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.07] border border-white/[0.05] hover:border-white/[0.1] transition-all text-left"
                         >
                           <action.icon className={cn('w-3.5 h-3.5 flex-shrink-0', action.color)} />
-                          <span className="text-[13px] text-[#d8d8ec]">{action.label}</span>
+                          <span className="text-[13px] text-[#D2D5DB]">{action.label}</span>
                         </button>
                       ))}
                     </div>
@@ -200,7 +200,7 @@ export function Preview() {
           {/* Shot list */}
           <div className="overflow-y-auto">
             <div className="p-3">
-              <p className="text-[12px] text-[#9494b4] uppercase tracking-widest font-medium mb-2 px-1">
+              <p className="text-[12px] text-[#5E6068] uppercase tracking-widest font-medium mb-2 px-1">
                 镜头列表 · 第 {ep.num} 集
               </p>
               <div className="space-y-1.5">
@@ -240,13 +240,13 @@ export function Preview() {
 
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-1.5 mb-0.5">
-                          <span className="text-[13px] font-mono text-[#ababc8]">
+                          <span className="text-[13px] font-mono text-[#8B8E96]">
                             S{String(shot.num).padStart(2, '0')}
                           </span>
-                          {shot.dialogue && <span className="text-[13px] text-[#ababc8]">台词</span>}
-                          {shot.narrator && <span className="text-[13px] text-[#ababc8]">旁白</span>}
+                          {shot.dialogue && <span className="text-[13px] text-[#8B8E96]">台词</span>}
+                          {shot.narrator && <span className="text-[13px] text-[#8B8E96]">旁白</span>}
                         </div>
-                        <p className="text-[13px] text-[#d8d8ec] line-clamp-2 leading-snug">
+                        <p className="text-[13px] text-[#D2D5DB] line-clamp-2 leading-snug">
                           {shot.description}
                         </p>
                       </div>

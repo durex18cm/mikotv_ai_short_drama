@@ -76,16 +76,16 @@ export function AutoEdit() {
               <motion.div
                 key={item.label}
                 variants={gridItemVariants}
-                className="bg-[#111128] border border-white/[0.06] rounded-xl p-4"
+                className="bg-[#12151C] border border-white/[0.06] rounded-xl p-4"
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <item.icon className="w-4 h-4 text-[#b8b8cc]" />
-                  <span className="text-xs text-[#c8c8e0]">{item.label}</span>
+                  <item.icon className="w-4 h-4 text-[#B4B7BE]" />
+                  <span className="text-xs text-[#B4B7BE]">{item.label}</span>
                 </div>
-                <p className="text-sm font-semibold text-[#ededff]">{item.count}</p>
+                <p className="text-sm font-semibold text-[#EDEEF0]">{item.count}</p>
                 <div className="flex items-center gap-1 mt-1">
-                  <CheckCircle2 className={cn('w-3 h-3', item.ok ? 'text-emerald-400' : 'text-[#ababc8]')} />
-                  <span className={cn('text-[12px]', item.ok ? 'text-emerald-400' : 'text-[#ababc8]')}>
+                  <CheckCircle2 className={cn('w-3 h-3', item.ok ? 'text-emerald-400' : 'text-[#8B8E96]')} />
+                  <span className={cn('text-[12px]', item.ok ? 'text-emerald-400' : 'text-[#8B8E96]')}>
                     {item.ok ? '就绪' : '已关闭'}
                   </span>
                 </div>
@@ -110,7 +110,7 @@ export function AutoEdit() {
                   key={ep.id}
                   variants={gridItemVariants}
                   className={cn(
-                    'bg-[#111128] border rounded-2xl overflow-hidden transition-colors',
+                    'bg-[#12151C] border rounded-2xl overflow-hidden transition-colors',
                     isDone ? 'border-emerald-500/20' : isGenerating ? 'border-[#EC407A]/30' : 'border-white/[0.06]'
                   )}
                 >
@@ -126,12 +126,12 @@ export function AutoEdit() {
                           ) : isGenerating ? (
                             <Loader2 className="w-5 h-5 text-[#F06292] animate-spin" />
                           ) : (
-                            <Film className="w-5 h-5 text-[#b8b8cc]" />
+                            <Film className="w-5 h-5 text-[#B4B7BE]" />
                           )}
                         </div>
                         <div>
-                          <p className="text-sm font-semibold text-[#ededff]">第 {ep.num} 集 · {ep.title}</p>
-                          <p className="text-xs text-[#b8b8cc] mt-0.5">
+                          <p className="text-sm font-semibold text-[#EDEEF0]">第 {ep.num} 集 · {ep.title}</p>
+                          <p className="text-xs text-[#B4B7BE] mt-0.5">
                             {ep.shotCount} 个镜头 · 约 {ep.totalDuration}s · {ep.sceneCount} 个场景
                           </p>
                         </div>
@@ -148,8 +148,8 @@ export function AutoEdit() {
                         { label: '音乐', done: true },
                       ].map(item => (
                         <div key={item.label} className="flex items-center gap-1.5 text-[12px]">
-                          <CheckCircle2 className={cn('w-3 h-3', item.done ? 'text-emerald-400' : 'text-[#9494b4]')} />
-                          <span className={item.done ? 'text-[#c0c0da]' : 'text-[#9494b4]'}>{item.label}</span>
+                          <CheckCircle2 className={cn('w-3 h-3', item.done ? 'text-emerald-400' : 'text-[#5E6068]')} />
+                          <span className={item.done ? 'text-[#B4B7BE]' : 'text-[#5E6068]'}>{item.label}</span>
                         </div>
                       ))}
                     </div>

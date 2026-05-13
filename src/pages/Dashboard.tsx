@@ -20,7 +20,7 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
     <motion.div
       whileHover={{ y: -2 }}
       transition={{ duration: 0.15 }}
-      className="bg-[#111128] border border-white/[0.06] rounded-xl p-5 cursor-pointer hover:border-white/[0.1] hover:bg-[#131335] transition-all duration-200 group"
+      className="bg-[#12151C] border border-white/[0.06] rounded-xl p-5 cursor-pointer hover:border-white/[0.1] hover:bg-[#181B24] transition-all duration-200 group"
       onClick={onOpen}
     >
       <div className="flex items-start justify-between mb-3">
@@ -29,8 +29,8 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
         </div>
         <Badge variant={status.variant}>{status.label}</Badge>
       </div>
-      <h3 className="font-semibold text-[#ededff] text-sm mb-1 group-hover:text-white transition-colors">{project.name}</h3>
-      <div className="flex items-center gap-3 text-[13px] text-[#b8b8cc]">
+      <h3 className="font-semibold text-[#EDEEF0] text-sm mb-1 group-hover:text-white transition-colors">{project.name}</h3>
+      <div className="flex items-center gap-3 text-[13px] text-[#B4B7BE]">
         <span className="flex items-center gap-1"><Film className="w-3 h-3" /> {project.episodes} 集</span>
         <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {project.duration}</span>
         <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {project.createdAt}</span>
@@ -51,7 +51,7 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
             />
           ))}
         </div>
-        <ArrowRight className="w-3.5 h-3.5 text-[#ababc8] group-hover:text-[#F06292] transition-colors group-hover:translate-x-0.5" />
+        <ArrowRight className="w-3.5 h-3.5 text-[#8B8E96] group-hover:text-[#F06292] transition-colors group-hover:translate-x-0.5" />
       </div>
     </motion.div>
   )
@@ -69,12 +69,12 @@ export function Dashboard() {
   }
 
   return (
-    <div className="min-h-full bg-[#07070f]">
+    <div className="min-h-full bg-[#0B0D12]">
       {/* Nav */}
       <header className="border-b border-white/[0.05] px-8 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <img src="/images/favorite.png" alt="Miko TV" className="w-8 h-8 rounded-md object-cover flex-shrink-0" />
-          <span className="font-semibold text-[#ededff]">Miko TV</span>
+          <span className="font-semibold text-[#EDEEF0]">Miko TV</span>
         </div>
         <Button size="sm" onClick={startNewProject}>
           <Plus className="w-4 h-4" />
@@ -94,10 +94,10 @@ export function Dashboard() {
             <Sparkles className="w-3.5 h-3.5 text-[#F06292]" />
             <span className="text-xs text-[#F48FB1] font-medium">AI 驱动的短剧创作平台</span>
           </div>
-          <h1 className="text-4xl font-bold text-[#ededff] mb-3 tracking-tight">
+          <h1 className="text-4xl font-bold text-[#EDEEF0] mb-3 tracking-tight">
             剧本进，<span className="gradient-text">短剧出</span>
           </h1>
-          <p className="text-[#c0c0da] text-base max-w-md mx-auto leading-relaxed">
+          <p className="text-[#B4B7BE] text-base max-w-md mx-auto leading-relaxed">
             上传剧本，AI 自动完成解析、分镜、关键帧、视频生成、配音、字幕与剪辑合成
           </p>
           <motion.div
@@ -117,9 +117,9 @@ export function Dashboard() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="bg-[#0d0d1f] border border-white/[0.05] rounded-2xl p-6 mb-12"
+          className="bg-[#0F1219] border border-white/[0.05] rounded-2xl p-6 mb-12"
         >
-          <p className="text-[13px] text-[#9494b4] uppercase tracking-widest mb-4 font-medium">创作流程</p>
+          <p className="text-[13px] text-[#5E6068] uppercase tracking-widest mb-4 font-medium">创作流程</p>
           <div className="flex items-center gap-0 overflow-x-auto">
             {['上传剧本', '确认角色', '选择风格', '一键生成', '局部修改', '导出视频'].map((label, i) => (
               <div key={i} className="flex items-center gap-0 flex-shrink-0">
@@ -127,7 +127,7 @@ export function Dashboard() {
                   <div className="w-8 h-8 rounded-lg bg-[#E91E63]/10 border border-[#EC407A]/20 flex items-center justify-center">
                     <span className="text-[12px] font-semibold text-[#F06292]">{i + 1}</span>
                   </div>
-                  <span className="text-[13px] text-[#c0c0da] whitespace-nowrap">{label}</span>
+                  <span className="text-[13px] text-[#B4B7BE] whitespace-nowrap">{label}</span>
                 </div>
                 {i < 5 && (
                   <div className="w-8 h-px bg-white/[0.06] mx-1 flex-shrink-0" />
@@ -144,8 +144,8 @@ export function Dashboard() {
           transition={{ duration: 0.4, delay: 0.2 }}
         >
           <div className="flex items-center justify-between mb-5">
-            <h2 className="text-sm font-semibold text-[#ededff]">最近项目</h2>
-            <span className="text-xs text-[#ababc8]">{MOCK_EXISTING_PROJECTS.length} 个项目</span>
+            <h2 className="text-sm font-semibold text-[#EDEEF0]">最近项目</h2>
+            <span className="text-xs text-[#8B8E96]">{MOCK_EXISTING_PROJECTS.length} 个项目</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {MOCK_EXISTING_PROJECTS.map((project, i) => (
@@ -168,9 +168,9 @@ export function Dashboard() {
               className="border border-dashed border-white/[0.08] rounded-xl p-5 cursor-pointer hover:border-[#EC407A]/30 hover:bg-[#E91E63]/[0.03] transition-all duration-200 flex flex-col items-center justify-center min-h-[140px] group"
             >
               <div className="w-10 h-10 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center mb-3 group-hover:border-[#EC407A]/20 group-hover:bg-[#E91E63]/10 transition-all">
-                <Plus className="w-5 h-5 text-[#ababc8] group-hover:text-[#F06292] transition-colors" />
+                <Plus className="w-5 h-5 text-[#8B8E96] group-hover:text-[#F06292] transition-colors" />
               </div>
-              <p className="text-xs text-[#b8b8cc] group-hover:text-[#F48FB1] transition-colors">创建新项目</p>
+              <p className="text-xs text-[#B4B7BE] group-hover:text-[#F48FB1] transition-colors">创建新项目</p>
             </motion.div>
           </div>
         </motion.div>

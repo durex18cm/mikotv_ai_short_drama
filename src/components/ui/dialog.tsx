@@ -33,7 +33,7 @@ export function DialogContent({
       <DialogPrimitive.Content
         className={cn(
           'fixed left-[50%] top-[50%] z-50 translate-x-[-50%] translate-y-[-50%]',
-          'w-full max-w-lg bg-[#111128] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/50',
+          'w-full max-w-lg bg-[#12151C] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/50',
           'data-[state=open]:animate-in data-[state=closed]:animate-out',
           'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
           'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
@@ -45,7 +45,7 @@ export function DialogContent({
         {...props}
       >
         {children}
-        <DialogPrimitive.Close className="absolute right-4 top-4 rounded-lg p-1.5 text-[#c0c0da] hover:text-[#ededff] hover:bg-white/[0.06] transition-colors focus:outline-none">
+        <DialogPrimitive.Close className="absolute right-4 top-4 rounded-lg p-1.5 text-[#B4B7BE] hover:text-[#EDEEF0] hover:bg-white/[0.06] transition-colors focus:outline-none">
           <X className="h-4 w-4" />
         </DialogPrimitive.Close>
       </DialogPrimitive.Content>
@@ -63,7 +63,7 @@ export function DialogTitle({
 }: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>) {
   return (
     <DialogPrimitive.Title
-      className={cn('text-base font-semibold text-[#ededff]', className)}
+      className={cn('text-base font-semibold text-[#EDEEF0]', className)}
       {...props}
     />
   )
@@ -75,7 +75,7 @@ export function DialogDescription({
 }: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>) {
   return (
     <DialogPrimitive.Description
-      className={cn('text-sm text-[#c8c8e0] mt-1', className)}
+      className={cn('text-sm text-[#B4B7BE] mt-1', className)}
       {...props}
     />
   )

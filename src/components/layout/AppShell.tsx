@@ -25,18 +25,18 @@ function Header() {
   const { project, currentStep } = state
 
   return (
-    <header className="h-13 flex items-center px-5 border-b border-white/[0.05] bg-[#09091a]/80 backdrop-blur-sm flex-shrink-0" style={{ height: '52px' }}>
+    <header className="h-13 flex items-center px-5 border-b border-white/[0.05] bg-[#0F1219]/80 backdrop-blur-sm flex-shrink-0" style={{ height: '52px' }}>
       <div className="flex-1 flex items-center gap-2 min-w-0">
-        <span className="text-sm text-[#c8c8e0] flex-shrink-0 font-medium">
+        <span className="text-sm text-[#B4B7BE] flex-shrink-0 font-medium">
           {project?.name ?? '未命名项目'}
         </span>
-        <span className="text-[#5a5a8a] flex-shrink-0">/</span>
-        <span className="text-sm text-[#eaeaf8] truncate font-medium">
+        <span className="text-[#5E6068] flex-shrink-0">/</span>
+        <span className="text-sm text-[#EDEEF0] truncate font-medium">
           {STEP_LABELS[currentStep] ?? ''}
         </span>
       </div>
       <div className="flex items-center gap-3 flex-shrink-0">
-        <div className="flex items-center gap-1.5 text-xs text-[#ababc8]">
+        <div className="flex items-center gap-1.5 text-xs text-[#8B8E96]">
           <Save className="w-3.5 h-3.5" />
           <span>自动保存</span>
         </div>
@@ -58,7 +58,7 @@ export function AppShell({ children }: AppShellProps) {
   const { state } = useApp()
 
   return (
-    <div className="flex h-full overflow-hidden bg-[#07070f]">
+    <div className="flex h-full overflow-hidden bg-[#0B0D12]">
       <Sidebar />
       <div className="flex-1 flex flex-col overflow-hidden min-w-0">
         <Header />
@@ -96,8 +96,8 @@ export function PageLayout({
     <div className="flex flex-col h-full">
       <div className="px-6 py-4 border-b border-white/[0.04] flex items-start justify-between flex-shrink-0">
         <div>
-          <h2 className="text-base font-semibold text-[#ededff]">{title}</h2>
-          {description && <p className="text-xs text-[#c0c0da] mt-0.5">{description}</p>}
+          <h2 className="text-base font-semibold text-[#EDEEF0]">{title}</h2>
+          {description && <p className="text-xs text-[#B4B7BE] mt-0.5">{description}</p>}
         </div>
         {action && <div>{action}</div>}
       </div>
@@ -108,7 +108,7 @@ export function PageLayout({
 
 export function ActionBar({ children }: { children: ReactNode }) {
   return (
-    <div className="flex items-center justify-between px-6 py-3 border-t border-white/[0.05] bg-[#09091a]/60 backdrop-blur-sm flex-shrink-0">
+    <div className="flex items-center justify-between px-6 py-3 border-t border-white/[0.05] bg-[#0F1219]/60 backdrop-blur-sm flex-shrink-0">
       {children}
     </div>
   )

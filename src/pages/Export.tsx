@@ -66,9 +66,9 @@ export function Export() {
                 variants={panelRevealVariants}
                 initial="hidden"
                 animate="show"
-                className="bg-[#111128] border border-white/[0.06] rounded-2xl p-5"
+                className="bg-[#12151C] border border-white/[0.06] rounded-2xl p-5"
               >
-                <p className="text-[12px] text-[#9494b4] uppercase tracking-widest font-medium mb-4">导出设置</p>
+                <p className="text-[12px] text-[#5E6068] uppercase tracking-widest font-medium mb-4">导出设置</p>
                 <div className="space-y-4">
                   <div>
                     <Label className="mb-2 block">导出范围</Label>
@@ -86,7 +86,7 @@ export function Export() {
                             'py-2 px-3 rounded-lg text-xs font-medium border transition-all',
                             range === opt.value
                               ? 'bg-[#E91E63]/20 border-[#EC407A]/40 text-[#F48FB1]'
-                              : 'bg-white/[0.03] border-white/[0.06] text-[#c0c0da] hover:border-white/[0.1]'
+                              : 'bg-white/[0.03] border-white/[0.06] text-[#B4B7BE] hover:border-white/[0.1]'
                           )}
                         >
                           {opt.label}
@@ -97,16 +97,16 @@ export function Export() {
                   <div className="flex items-center justify-between py-2">
                     <div>
                       <Label className="block mb-0.5">字幕</Label>
-                      <p className="text-[12px] text-[#ababc8]">导出带字幕版本</p>
+                      <p className="text-[12px] text-[#8B8E96]">导出带字幕版本</p>
                     </div>
                     <Switch checked={withSubtitle} onCheckedChange={setWithSubtitle} />
                   </div>
                   <div className="flex items-center justify-between">
-                    <div><Label className="block mb-0.5">格式</Label><p className="text-[12px] text-[#ababc8]">输出格式</p></div>
+                    <div><Label className="block mb-0.5">格式</Label><p className="text-[12px] text-[#8B8E96]">输出格式</p></div>
                     <Badge variant="muted">MP4 (H.264)</Badge>
                   </div>
                   <div className="flex items-center justify-between">
-                    <div><Label className="block mb-0.5">比例</Label><p className="text-[12px] text-[#ababc8]">视频画面比例</p></div>
+                    <div><Label className="block mb-0.5">比例</Label><p className="text-[12px] text-[#8B8E96]">视频画面比例</p></div>
                     <Badge variant="muted">9:16 竖屏</Badge>
                   </div>
                 </div>
@@ -117,9 +117,9 @@ export function Export() {
                 variants={panelRevealVariants}
                 initial="hidden"
                 animate="show"
-                className="bg-[#111128] border border-white/[0.06] rounded-2xl p-5"
+                className="bg-[#12151C] border border-white/[0.06] rounded-2xl p-5"
               >
-                <p className="text-[12px] text-[#9494b4] uppercase tracking-widest font-medium mb-4">导出预览</p>
+                <p className="text-[12px] text-[#5E6068] uppercase tracking-widest font-medium mb-4">导出预览</p>
                 <motion.div
                   className="space-y-2"
                   variants={gridContainerVariants}
@@ -133,19 +133,19 @@ export function Export() {
                       className="flex items-center justify-between py-2 border-b border-white/[0.04] last:border-0"
                     >
                       <div className="flex items-center gap-3">
-                        <FileVideo className="w-4 h-4 text-[#b8b8cc]" />
+                        <FileVideo className="w-4 h-4 text-[#B4B7BE]" />
                         <div>
-                          <p className="text-xs text-[#ededff] font-medium">{project?.name ?? '作品'} · 第 {ep.num} 集</p>
-                          <p className="text-[12px] text-[#ababc8] mt-0.5">{ep.title} · {ep.totalDuration}s · {withSubtitle ? '带字幕' : '无字幕'}</p>
+                          <p className="text-xs text-[#EDEEF0] font-medium">{project?.name ?? '作品'} · 第 {ep.num} 集</p>
+                          <p className="text-[12px] text-[#8B8E96] mt-0.5">{ep.title} · {ep.totalDuration}s · {withSubtitle ? '带字幕' : '无字幕'}</p>
                         </div>
                       </div>
-                      <div className="text-[12px] text-[#b8b8cc]">~{Math.round(ep.totalDuration * 0.8)}MB</div>
+                      <div className="text-[12px] text-[#B4B7BE]">~{Math.round(ep.totalDuration * 0.8)}MB</div>
                     </motion.div>
                   ))}
                 </motion.div>
                 <div className="mt-4 flex items-center justify-between text-xs">
-                  <span className="text-[#b8b8cc]">共 {selectedEps.length} 个文件</span>
-                  <span className="text-[#ededff] font-medium">约 {Math.round(selectedEps.reduce((s, ep) => s + ep.totalDuration * 0.8, 0))}MB</span>
+                  <span className="text-[#B4B7BE]">共 {selectedEps.length} 个文件</span>
+                  <span className="text-[#EDEEF0] font-medium">约 {Math.round(selectedEps.reduce((s, ep) => s + ep.totalDuration * 0.8, 0))}MB</span>
                 </div>
               </motion.div>
             </div>
@@ -164,14 +164,14 @@ export function Export() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="bg-[#111128] border border-white/[0.06] rounded-2xl p-8 flex flex-col items-center justify-center gap-4 min-h-[260px]"
+                    className="bg-[#12151C] border border-white/[0.06] rounded-2xl p-8 flex flex-col items-center justify-center gap-4 min-h-[260px]"
                   >
                     <div className="w-14 h-14 rounded-2xl bg-[#E91E63]/10 border border-[#EC407A]/20 flex items-center justify-center">
                       <Film className="w-7 h-7 text-[#F06292]" />
                     </div>
                     <div className="text-center">
-                      <p className="text-sm font-semibold text-[#ededff] mb-1">准备导出</p>
-                      <p className="text-xs text-[#b8b8cc]">确认设置后，点击下方「导出 MP4」按钮开始</p>
+                      <p className="text-sm font-semibold text-[#EDEEF0] mb-1">准备导出</p>
+                      <p className="text-xs text-[#B4B7BE]">确认设置后，点击下方「导出 MP4」按钮开始</p>
                     </div>
                   </motion.div>
                 )}
@@ -182,27 +182,27 @@ export function Export() {
                     initial={{ opacity: 0, scale: 0.96 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
-                    className="bg-[#111128] border border-[#EC407A]/25 rounded-2xl p-6 min-h-[260px] flex flex-col justify-center gap-5"
+                    className="bg-[#12151C] border border-[#EC407A]/25 rounded-2xl p-6 min-h-[260px] flex flex-col justify-center gap-5"
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl bg-[#E91E63]/10 flex items-center justify-center flex-shrink-0">
                         <Loader2 className="w-5 h-5 text-[#F06292] animate-spin" />
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-[#ededff]">正在导出视频…</p>
-                        <p className="text-xs text-[#b8b8cc] mt-0.5">{exportPhase}</p>
+                        <p className="text-sm font-semibold text-[#EDEEF0]">正在导出视频…</p>
+                        <p className="text-xs text-[#B4B7BE] mt-0.5">{exportPhase}</p>
                       </div>
                     </div>
                     <div>
                       <Progress value={exportProgress} />
                       <div className="flex justify-between mt-2">
-                        <span className="text-xs text-[#b8b8cc]">处理中</span>
+                        <span className="text-xs text-[#B4B7BE]">处理中</span>
                         <span className="text-xs text-[#F48FB1] font-medium">{Math.round(exportProgress)}%</span>
                       </div>
                     </div>
                     <div className="space-y-2">
                       {EXPORT_PHASES.slice(0, Math.ceil(exportProgress / 100 * EXPORT_PHASES.length)).map((ph, i) => (
-                        <div key={i} className="flex items-center gap-2 text-xs text-[#b8b8cc]">
+                        <div key={i} className="flex items-center gap-2 text-xs text-[#B4B7BE]">
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
                           {ph}
                         </div>
@@ -223,8 +223,8 @@ export function Export() {
                         <CheckCircle2 className="w-5 h-5 text-emerald-400" />
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-[#ededff]">导出完成！</p>
-                        <p className="text-xs text-[#b8b8cc]">《{project?.name}》· {selectedEps.length} 集</p>
+                        <p className="text-sm font-semibold text-[#EDEEF0]">导出完成！</p>
+                        <p className="text-xs text-[#B4B7BE]">《{project?.name}》· {selectedEps.length} 集</p>
                       </div>
                     </div>
                     <div className="flex flex-col gap-2">

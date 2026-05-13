@@ -62,13 +62,13 @@ export function Storyboard() {
                 className={cn(
                   'w-full text-left px-3 py-2.5 rounded-lg transition-all',
                   selectedEp === ep.id
-                    ? 'bg-[#E91E63]/[0.1] text-[#ededff]'
-                    : 'text-[#b8b8cc] hover:bg-white/[0.04] hover:text-[#d8d8ec]'
+                    ? 'bg-[#E91E63]/[0.1] text-[#EDEEF0]'
+                    : 'text-[#B4B7BE] hover:bg-white/[0.04] hover:text-[#D2D5DB]'
                 )}
               >
                 <p className="text-xs font-medium">第 {ep.num} 集</p>
-                <p className="text-[12px] text-[#ababc8] mt-0.5">{ep.title}</p>
-                <p className="text-[12px] text-[#9494b4] mt-1">{ep.shotCount} 镜头 · {ep.totalDuration}s</p>
+                <p className="text-[12px] text-[#8B8E96] mt-0.5">{ep.title}</p>
+                <p className="text-[12px] text-[#5E6068] mt-1">{ep.shotCount} 镜头 · {ep.totalDuration}s</p>
               </button>
             ))}
           </div>
@@ -79,7 +79,7 @@ export function Storyboard() {
               <thead className="sticky top-0 bg-[#0e0e1e] border-b border-white/[0.04]">
                 <tr>
                   {['镜头', '画面描述', '台词/旁白', '时长', '类型', '操作'].map(h => (
-                    <th key={h} className="text-left px-3 py-2.5 text-[12px] text-[#ababc8] font-medium uppercase tracking-wider whitespace-nowrap">
+                    <th key={h} className="text-left px-3 py-2.5 text-[12px] text-[#8B8E96] font-medium uppercase tracking-wider whitespace-nowrap">
                       {h}
                     </th>
                   ))}
@@ -102,24 +102,24 @@ export function Storyboard() {
                       selectedShot.id === shot.id ? 'bg-[#E91E63]/[0.05]' : ''
                     )}
                   >
-                    <td className="px-3 py-3 font-mono text-[12px] text-[#b8b8cc] whitespace-nowrap">
+                    <td className="px-3 py-3 font-mono text-[12px] text-[#B4B7BE] whitespace-nowrap">
                       S{String(shot.num).padStart(2, '0')}
                     </td>
                     <td className="px-3 py-3 max-w-[220px]">
-                      <p className="text-[#eaeaf8] line-clamp-2 leading-snug">{shot.description}</p>
+                      <p className="text-[#EDEEF0] line-clamp-2 leading-snug">{shot.description}</p>
                     </td>
                     <td className="px-3 py-3 max-w-[160px]">
-                      <p className="text-[#c8c8e0] line-clamp-2 leading-snug italic text-[13px]">
+                      <p className="text-[#B4B7BE] line-clamp-2 leading-snug italic text-[13px]">
                         {shot.dialogue ? `"${shot.dialogue}"` : shot.narrator ?? '—'}
                       </p>
                     </td>
-                    <td className="px-3 py-3 whitespace-nowrap text-[#c8c8e0]">{shot.duration}s</td>
+                    <td className="px-3 py-3 whitespace-nowrap text-[#B4B7BE]">{shot.duration}s</td>
                     <td className="px-3 py-3 whitespace-nowrap">
                       <Badge variant="muted">{shot.type}</Badge>
                     </td>
                     <td className="px-3 py-3 whitespace-nowrap">
                       <button
-                        className="text-[#ababc8] hover:text-[#F06292] transition-colors p-1"
+                        className="text-[#8B8E96] hover:text-[#F06292] transition-colors p-1"
                         onClick={e => { e.stopPropagation(); setSelectedShot(shot); setEditing(true) }}
                       >
                         <Edit3 className="w-3 h-3" />
@@ -132,17 +132,17 @@ export function Storyboard() {
           </div>
 
           {/* Detail panel */}
-          <div className="overflow-y-auto p-4 space-y-4 bg-[#0d0d1f]/40">
+          <div className="overflow-y-auto p-4 space-y-4 bg-[#0F1219]/40">
             <div className="flex items-center justify-between">
-              <p className="text-[12px] text-[#9494b4] uppercase tracking-widest font-medium">镜头详情</p>
-              <span className="text-[13px] text-[#b8b8cc] font-mono">
+              <p className="text-[12px] text-[#5E6068] uppercase tracking-widest font-medium">镜头详情</p>
+              <span className="text-[13px] text-[#B4B7BE] font-mono">
                 S{String(selectedShot.num).padStart(2, '0')}
               </span>
             </div>
 
             <div className="space-y-3">
               <div>
-                <p className="text-[12px] text-[#ababc8] mb-1">画面描述</p>
+                <p className="text-[12px] text-[#8B8E96] mb-1">画面描述</p>
                 {editing ? (
                   <div className="space-y-2">
                     <Textarea
@@ -153,7 +153,7 @@ export function Storyboard() {
                     <Button size="sm" className="w-full" onClick={() => setEditing(false)}>保存</Button>
                   </div>
                 ) : (
-                  <p className="text-xs text-[#eaeaf8] leading-relaxed">{editDesc}</p>
+                  <p className="text-xs text-[#EDEEF0] leading-relaxed">{editDesc}</p>
                 )}
               </div>
 
@@ -166,21 +166,21 @@ export function Storyboard() {
                 { label: '背景音乐', value: selectedShot.music || '—' },
               ].map(item => (
                 <div key={item.label}>
-                  <p className="text-[12px] text-[#ababc8]">{item.label}</p>
-                  <p className="text-xs text-[#eaeaf8] mt-0.5">{item.value}</p>
+                  <p className="text-[12px] text-[#8B8E96]">{item.label}</p>
+                  <p className="text-xs text-[#EDEEF0] mt-0.5">{item.value}</p>
                 </div>
               ))}
 
               {selectedShot.dialogue && (
                 <div>
-                  <p className="text-[12px] text-[#ababc8]">台词</p>
-                  <p className="text-xs text-[#eaeaf8] italic mt-0.5">"{selectedShot.dialogue}"</p>
+                  <p className="text-[12px] text-[#8B8E96]">台词</p>
+                  <p className="text-xs text-[#EDEEF0] italic mt-0.5">"{selectedShot.dialogue}"</p>
                 </div>
               )}
               {selectedShot.narrator && (
                 <div>
-                  <p className="text-[12px] text-[#ababc8]">旁白</p>
-                  <p className="text-xs text-[#eaeaf8] mt-0.5">{selectedShot.narrator}</p>
+                  <p className="text-[12px] text-[#8B8E96]">旁白</p>
+                  <p className="text-xs text-[#EDEEF0] mt-0.5">{selectedShot.narrator}</p>
                 </div>
               )}
             </div>

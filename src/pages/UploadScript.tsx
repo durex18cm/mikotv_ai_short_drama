@@ -67,10 +67,10 @@ export function UploadScript() {
             <div className="flex flex-col p-5 gap-3 overflow-hidden">
               <div className="flex items-center justify-between flex-shrink-0">
                 <div className="flex items-center gap-2">
-                  <FileText className="w-4 h-4 text-[#b8b8cc]" />
-                  <span className="text-xs font-medium text-[#d8d8ec]">剧本文本</span>
+                  <FileText className="w-4 h-4 text-[#B4B7BE]" />
+                  <span className="text-xs font-medium text-[#D2D5DB]">剧本文本</span>
                 </div>
-                <div className="flex items-center gap-3 text-[13px] text-[#ababc8]">
+                <div className="flex items-center gap-3 text-[13px] text-[#8B8E96]">
                   <span>{wordCount.toLocaleString()} 字</span>
                   <span>{lineCount} 行</span>
                 </div>
@@ -84,10 +84,10 @@ export function UploadScript() {
             </div>
 
             {/* Right: analysis */}
-            <div className="flex flex-col p-5 gap-4 overflow-y-auto bg-[#0d0d1f]/50">
+            <div className="flex flex-col p-5 gap-4 overflow-y-auto bg-[#0F1219]/50">
               <div className="flex items-center gap-2 flex-shrink-0">
-                <Cpu className="w-4 h-4 text-[#b8b8cc]" />
-                <span className="text-xs font-medium text-[#d8d8ec]">AI 解析</span>
+                <Cpu className="w-4 h-4 text-[#B4B7BE]" />
+                <span className="text-xs font-medium text-[#D2D5DB]">AI 解析</span>
               </div>
 
               <AnimatePresence mode="wait">
@@ -114,7 +114,7 @@ export function UploadScript() {
                     </AnimatePresence>
                     <div className="space-y-2">
                       {PARSE_PHASES.slice(0, phaseIdx + 1).map((phase, i) => (
-                        <div key={i} className="flex items-center gap-2 text-xs text-[#b8b8cc]">
+                        <div key={i} className="flex items-center gap-2 text-xs text-[#B4B7BE]">
                           <CheckCircle2 className="w-3 h-3 text-emerald-500 flex-shrink-0" />
                           <span>{phase}</span>
                         </div>
@@ -133,8 +133,8 @@ export function UploadScript() {
                       <span className="font-medium">解析完成</span>
                     </div>
 
-                    <div className="bg-[#111128] border border-white/[0.06] rounded-xl p-4 space-y-3">
-                      <p className="text-[12px] text-[#9494b4] uppercase tracking-widest font-medium">识别结果</p>
+                    <div className="bg-[#12151C] border border-white/[0.06] rounded-xl p-4 space-y-3">
+                      <p className="text-[12px] text-[#5E6068] uppercase tracking-widest font-medium">识别结果</p>
                       {[
                         ['剧集数量', '3 集'],
                         ['场景数量', '12 个场景'],
@@ -145,8 +145,8 @@ export function UploadScript() {
                         ['预计时长', '约 240 秒'],
                       ].map(([k, v]) => (
                         <div key={k} className="flex items-center justify-between">
-                          <span className="text-xs text-[#b8b8cc]">{k}</span>
-                          <span className="text-xs font-semibold text-[#ededff]">{v}</span>
+                          <span className="text-xs text-[#B4B7BE]">{k}</span>
+                          <span className="text-xs font-semibold text-[#EDEEF0]">{v}</span>
                         </div>
                       ))}
                     </div>
@@ -169,11 +169,11 @@ export function UploadScript() {
                     className="flex-1 flex flex-col items-center justify-center gap-3 py-12"
                   >
                     <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center">
-                      <Cpu className="w-6 h-6 text-[#9292b4]" />
+                      <Cpu className="w-6 h-6 text-[#5E6068]" />
                     </div>
                     <div className="text-center">
-                      <p className="text-xs text-[#b8b8cc]">点击「解析剧本」</p>
-                      <p className="text-[13px] text-[#9494b4] mt-1">AI 将自动拆分集数、场景和镜头</p>
+                      <p className="text-xs text-[#B4B7BE]">点击「解析剧本」</p>
+                      <p className="text-[13px] text-[#5E6068] mt-1">AI 将自动拆分集数、场景和镜头</p>
                     </div>
                   </motion.div>
                 )}

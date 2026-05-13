@@ -34,7 +34,7 @@ function VoiceCard({
   }
 
   return (
-    <div className="bg-[#111128] border border-white/[0.06] rounded-xl p-4 flex flex-col relative overflow-hidden">
+    <div className="bg-[#12151C] border border-white/[0.06] rounded-xl p-4 flex flex-col relative overflow-hidden">
       {/* Per-card progress bar shown while generating */}
       {generating && (
         <div className="absolute top-0 inset-x-0 h-0.5 bg-white/[0.06] overflow-hidden">
@@ -56,8 +56,8 @@ function VoiceCard({
           imagePosition={getCharacterAvatarPosition(character.name)}
         />
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-semibold text-[#ededff]">{character.name}</p>
-          <p className="text-[12px] text-[#b8b8cc] truncate">{character.role}</p>
+          <p className="text-xs font-semibold text-[#EDEEF0]">{character.name}</p>
+          <p className="text-[12px] text-[#B4B7BE] truncate">{character.role}</p>
         </div>
         {generating && !generated && (
           <span className="text-[11px] text-[#F06292] animate-pulse">生成中…</span>
@@ -89,7 +89,7 @@ function VoiceCard({
         </div>
       </div>
 
-      <p className="text-[12px] text-[#b8b8cc] mb-3 italic flex-1">"{character.voiceDesc}"</p>
+      <p className="text-[12px] text-[#B4B7BE] mb-3 italic flex-1">"{character.voiceDesc}"</p>
 
       <div className="flex gap-2">
         <Button variant="secondary" size="sm" className="flex-1" onClick={tryPlay} disabled={!generated}>
@@ -135,8 +135,8 @@ export function VoiceSubtitle() {
     cn(
       'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all',
       activeTab === tab
-        ? 'bg-[#1e1e3a] text-[#ededff] shadow-sm'
-        : 'text-[#b8b8cc] hover:text-[#ededff]'
+        ? 'bg-[#1e1e3a] text-[#EDEEF0] shadow-sm'
+        : 'text-[#B4B7BE] hover:text-[#EDEEF0]'
     )
 
   return (
@@ -146,8 +146,8 @@ export function VoiceSubtitle() {
       {/* ── Page title ──────────────────────────────────────────── */}
       <div className="px-6 py-4 border-b border-white/[0.04] flex items-start justify-between flex-shrink-0">
         <div>
-          <h2 className="text-base font-semibold text-[#ededff]">配音与字幕</h2>
-          <p className="text-xs text-[#c0c0da] mt-0.5">为角色台词和旁白自动生成配音，并生成字幕</p>
+          <h2 className="text-base font-semibold text-[#EDEEF0]">配音与字幕</h2>
+          <p className="text-xs text-[#B4B7BE] mt-0.5">为角色台词和旁白自动生成配音，并生成字幕</p>
         </div>
       </div>
 
@@ -200,18 +200,18 @@ export function VoiceSubtitle() {
                 {/* Narrator card */}
                 <motion.div
                   variants={gridItemVariants}
-                  className="bg-[#111128] border border-white/[0.06] rounded-xl p-4 flex flex-col"
+                  className="bg-[#12151C] border border-white/[0.06] rounded-xl p-4 flex flex-col"
                 >
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-10 h-10 rounded-full bg-[#1a1a3a] border border-white/[0.08] flex items-center justify-center flex-shrink-0">
-                      <Mic className="w-4 h-4 text-[#c0c0da]" />
+                      <Mic className="w-4 h-4 text-[#B4B7BE]" />
                     </div>
                     <div>
-                      <p className="text-xs font-semibold text-[#ededff]">旁白</p>
-                      <p className="text-[12px] text-[#b8b8cc]">系统旁白音</p>
+                      <p className="text-xs font-semibold text-[#EDEEF0]">旁白</p>
+                      <p className="text-[12px] text-[#B4B7BE]">系统旁白音</p>
                     </div>
                   </div>
-                  <p className="text-[12px] text-[#b8b8cc] mb-3 italic flex-1">"史诗感男声，低沉有力，富有感染力"</p>
+                  <p className="text-[12px] text-[#B4B7BE] mb-3 italic flex-1">"史诗感男声，低沉有力，富有感染力"</p>
                   <Button variant="secondary" size="sm" className="w-full" disabled={!voiceGenerated}>
                     <Volume2 className="w-3 h-3" />试听旁白音色
                   </Button>
@@ -221,7 +221,7 @@ export function VoiceSubtitle() {
 
             {/* Generate button — pinned at bottom, only shown when not yet generated */}
             {!voiceGenerated && (
-              <div className="flex-shrink-0 px-5 py-4 border-t border-white/[0.05] flex justify-center bg-[#07070f]/60">
+              <div className="flex-shrink-0 px-5 py-4 border-t border-white/[0.05] flex justify-center bg-[#0B0D12]/60">
                 <Button
                   size="lg"
                   onClick={generateAll}
@@ -246,21 +246,21 @@ export function VoiceSubtitle() {
                   onClick={() => setActiveEp(epId)}
                   className={cn(
                     'px-3 py-1 rounded text-xs transition-all',
-                    activeEp === epId ? 'bg-[#E91E63]/20 text-[#F48FB1]' : 'text-[#b8b8cc] hover:text-[#d8d8ec]'
+                    activeEp === epId ? 'bg-[#E91E63]/20 text-[#F48FB1]' : 'text-[#B4B7BE] hover:text-[#D2D5DB]'
                   )}
                 >
                   第 {i + 1} 集
                 </button>
               ))}
               <div className="flex-1" />
-              <span className="text-xs text-[#ababc8]">{epSubs.length} 条字幕</span>
+              <span className="text-xs text-[#8B8E96]">{epSubs.length} 条字幕</span>
             </div>
             <div className="flex-1 overflow-y-auto">
               <div className="divide-y divide-white/[0.04]">
                 {epSubs.map(sub => (
                   <div key={sub.id} className="px-5 py-3 flex items-start gap-4">
                     <div className="w-16 flex-shrink-0">
-                      <p className="text-[12px] font-mono text-[#ababc8]">
+                      <p className="text-[12px] font-mono text-[#8B8E96]">
                         {sub.startTime.toString().padStart(2, '0')}s–{sub.endTime.toString().padStart(2, '0')}s
                       </p>
                     </div>
@@ -273,7 +273,7 @@ export function VoiceSubtitle() {
                       {editingSubId === sub.id ? (
                         <div className="flex items-center gap-2">
                           <input
-                            className="flex-1 bg-white/[0.06] border border-[#EC407A]/40 rounded px-2 py-1 text-xs text-[#ededff] outline-none"
+                            className="flex-1 bg-white/[0.06] border border-[#EC407A]/40 rounded px-2 py-1 text-xs text-[#EDEEF0] outline-none"
                             value={subTexts[sub.id]}
                             onChange={e => setSubTexts(prev => ({ ...prev, [sub.id]: e.target.value }))}
                           />
@@ -282,12 +282,12 @@ export function VoiceSubtitle() {
                           </button>
                         </div>
                       ) : (
-                        <p className="text-xs text-[#eaeaf8]">{subTexts[sub.id]}</p>
+                        <p className="text-xs text-[#EDEEF0]">{subTexts[sub.id]}</p>
                       )}
                     </div>
                     <button
                       onClick={() => setEditingSubId(editingSubId === sub.id ? null : sub.id)}
-                      className="text-[#ababc8] hover:text-[#F06292] transition-colors p-1 flex-shrink-0"
+                      className="text-[#8B8E96] hover:text-[#F06292] transition-colors p-1 flex-shrink-0"
                     >
                       <Edit3 className="w-3 h-3" />
                     </button>

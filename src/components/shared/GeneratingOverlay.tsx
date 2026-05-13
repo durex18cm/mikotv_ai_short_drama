@@ -17,13 +17,13 @@ export function GeneratingOverlay({ visible, phase, progress, title = 'AI 正在
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="absolute inset-0 z-20 bg-[#07070f]/80 backdrop-blur-sm rounded-xl flex items-center justify-center"
+          className="absolute inset-0 z-20 bg-[#0B0D12]/80 backdrop-blur-sm rounded-xl flex items-center justify-center"
         >
           <motion.div
             initial={{ scale: 0.92, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.92, opacity: 0 }}
-            className="bg-[#111128] border border-white/[0.08] rounded-2xl p-8 w-80 flex flex-col items-center gap-4"
+            className="bg-[#12151C] border border-white/[0.08] rounded-2xl p-8 w-80 flex flex-col items-center gap-4"
           >
             <div className="relative">
               <div className="w-12 h-12 rounded-xl bg-[#E91E63]/10 border border-[#EC407A]/20 flex items-center justify-center">
@@ -36,12 +36,12 @@ export function GeneratingOverlay({ visible, phase, progress, title = 'AI 正在
               />
             </div>
             <div className="text-center">
-              <p className="text-sm font-medium text-[#ededff] mb-0.5">{title}</p>
-              <p className="text-xs text-[#c8c8e0]">{phase}</p>
+              <p className="text-sm font-medium text-[#EDEEF0] mb-0.5">{title}</p>
+              <p className="text-xs text-[#B4B7BE]">{phase}</p>
             </div>
             <div className="w-full">
               <Progress value={progress} />
-              <p className="text-right text-[12px] text-[#b8b8cc] mt-1">{Math.round(progress)}%</p>
+              <p className="text-right text-[12px] text-[#B4B7BE] mt-1">{Math.round(progress)}%</p>
             </div>
           </motion.div>
         </motion.div>

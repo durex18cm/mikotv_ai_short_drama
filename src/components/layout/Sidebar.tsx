@@ -32,7 +32,7 @@ export function Sidebar() {
   const { currentStep, stepStatuses, project } = state
 
   return (
-    <aside className="w-56 flex-shrink-0 h-full bg-[#0d0d1f] border-r border-white/[0.05] flex flex-col">
+    <aside className="w-56 flex-shrink-0 h-full bg-[#0F1219] border-r border-white/[0.05] flex flex-col">
       {/* Logo */}
       <div className="px-4 py-4 border-b border-white/[0.05]">
         <div className="flex items-center gap-2">
@@ -41,10 +41,10 @@ export function Sidebar() {
             alt="Miko TV"
             className="w-8 h-8 rounded-md flex-shrink-0 object-cover"
           />
-          <span className="font-semibold text-sm text-[#ededff] tracking-tight">Miko TV</span>
+          <span className="font-semibold text-sm text-[#EDEEF0] tracking-tight">Miko TV</span>
         </div>
         {project && (
-          <p className="text-[13px] text-[#b8b8cc] mt-2 truncate leading-tight pl-9">
+          <p className="text-[13px] text-[#B4B7BE] mt-2 truncate leading-tight pl-9">
             {project.name}
           </p>
         )}
@@ -79,10 +79,10 @@ export function Sidebar() {
                 className={cn(
                   'w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-left transition-all duration-150 group relative',
                   isActive
-                    ? 'bg-[#E91E63]/[0.12] text-[#ededff]'
+                    ? 'bg-[#E91E63]/[0.12] text-[#EDEEF0]'
                     : isCompleted
-                    ? 'hover:bg-white/[0.04] text-[#d8d8ec]'
-                    : 'text-[#ababc8] cursor-default',
+                    ? 'hover:bg-white/[0.04] text-[#D2D5DB]'
+                    : 'text-[#8B8E96] cursor-default',
                   canClick && !isActive && 'hover:bg-white/[0.04] cursor-pointer'
                 )}
               >
@@ -100,7 +100,7 @@ export function Sidebar() {
                       ? 'bg-[#E91E63]/20 text-[#F06292]'
                       : isCompleted
                       ? 'bg-emerald-500/10 text-emerald-400'
-                      : 'bg-white/[0.04] text-[#9292b4]'
+                      : 'bg-white/[0.04] text-[#5E6068]'
                   )}
                 >
                   {isCompleted && !isActive ? (
@@ -117,7 +117,7 @@ export function Sidebar() {
                 <span
                   className={cn(
                     'text-[13px] font-mono tabular-nums',
-                    isActive ? 'text-[#F06292]' : 'text-[#333366]'
+                    isActive ? 'text-[#F06292]' : 'text-[#3F4250]'
                   )}
                 >
                   {String(step.id).padStart(2, '0')}
@@ -130,7 +130,7 @@ export function Sidebar() {
 
       {/* Footer */}
       <div className="px-4 py-3 border-t border-white/[0.05]">
-        <p className="text-[12px] text-[#333366] leading-relaxed">
+        <p className="text-[12px] text-[#3F4250] leading-relaxed">
           剧本进，短剧出
         </p>
       </div>

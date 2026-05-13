@@ -62,7 +62,7 @@ export function Keyframes() {
                   'px-3 py-1.5 rounded-md text-xs font-medium transition-all',
                   selectedEp === ep.id
                     ? 'bg-[#E91E63]/20 text-[#F48FB1]'
-                    : 'text-[#b8b8cc] hover:text-[#d8d8ec]'
+                    : 'text-[#B4B7BE] hover:text-[#D2D5DB]'
                 )}
               >
                 第 {ep.num} 集
@@ -70,7 +70,7 @@ export function Keyframes() {
             ))}
           </div>
           <div className="flex-1" />
-          <div className="text-xs text-[#b8b8cc]">
+          <div className="text-xs text-[#B4B7BE]">
             {doneCount} / {shots.length} 已生成
           </div>
           {!generating && (
@@ -136,7 +136,7 @@ export function Keyframes() {
                   {/* Info */}
                   <div className="mt-2 px-0.5">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-[12px] font-mono text-[#b8b8cc]">
+                      <span className="text-[12px] font-mono text-[#B4B7BE]">
                         SHOT {String(shot.num).padStart(2, '0')}
                       </span>
                       <Badge
@@ -156,7 +156,7 @@ export function Keyframes() {
                           : '失败'}
                       </Badge>
                     </div>
-                    <p className="text-[12px] text-[#b8b8cc] line-clamp-2 leading-snug mb-2">
+                    <p className="text-[12px] text-[#B4B7BE] line-clamp-2 leading-snug mb-2">
                       {shot.description}
                     </p>
 
@@ -165,7 +165,7 @@ export function Keyframes() {
                       <div className="flex gap-1">
                         <button
                           onClick={() => setLightbox(shot.id)}
-                          className="flex-1 flex items-center justify-center gap-1 py-1 rounded bg-white/[0.04] hover:bg-white/[0.08] transition-colors text-[12px] text-[#c8c8e0]"
+                          className="flex-1 flex items-center justify-center gap-1 py-1 rounded bg-white/[0.04] hover:bg-white/[0.08] transition-colors text-[12px] text-[#B4B7BE]"
                         >
                           <ZoomIn className="w-3 h-3" />
                           查看
@@ -176,7 +176,7 @@ export function Keyframes() {
                             'flex-1 flex items-center justify-center gap-1 py-1 rounded transition-colors text-[12px]',
                             status === 'locked'
                               ? 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-400'
-                              : 'bg-white/[0.04] hover:bg-white/[0.08] text-[#c8c8e0]'
+                              : 'bg-white/[0.04] hover:bg-white/[0.08] text-[#B4B7BE]'
                           )}
                         >
                           <Lock className="w-3 h-3" />
@@ -184,7 +184,7 @@ export function Keyframes() {
                         </button>
                         <button
                           onClick={() => regenerate(shot.id)}
-                          className="py-1 px-2 rounded bg-white/[0.04] hover:bg-white/[0.08] transition-colors text-[#c8c8e0]"
+                          className="py-1 px-2 rounded bg-white/[0.04] hover:bg-white/[0.08] transition-colors text-[#B4B7BE]"
                         >
                           <RotateCcw className="w-3 h-3" />
                         </button>
@@ -229,9 +229,9 @@ export function Keyframes() {
                   return (
                     <div className="rounded-2xl overflow-hidden border border-white/10">
                       <ShotPlaceholder shotNum={shot.num} episodeNum={epNum} status="done" imageUrl={getShotImageUrl(shot)} className="w-full" />
-                      <div className="bg-[#111128] p-4">
-                        <p className="text-xs font-mono text-[#b8b8cc] mb-1">SHOT {String(shot.num).padStart(2, '0')}</p>
-                        <p className="text-sm text-[#ededff] leading-relaxed">{shot.description}</p>
+                      <div className="bg-[#12151C] p-4">
+                        <p className="text-xs font-mono text-[#B4B7BE] mb-1">SHOT {String(shot.num).padStart(2, '0')}</p>
+                        <p className="text-sm text-[#EDEEF0] leading-relaxed">{shot.description}</p>
                         <Button variant="ghost" size="sm" className="mt-3 w-full" onClick={() => setLightbox(null)}>
                           关闭
                         </Button>

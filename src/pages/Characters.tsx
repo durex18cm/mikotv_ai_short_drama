@@ -35,7 +35,7 @@ function CharacterCard({
   return (
     <div
       className={cn(
-        'bg-[#111128] border rounded-2xl p-5 transition-all duration-200',
+        'bg-[#12151C] border rounded-2xl p-5 transition-all duration-200',
         character.confirmed
           ? 'border-emerald-500/30 shadow-sm shadow-emerald-500/5'
           : 'border-white/[0.06] hover:border-white/[0.1]'
@@ -51,14 +51,14 @@ function CharacterCard({
         />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-0.5">
-            <h3 className="font-semibold text-[#ededff] text-sm">{character.name}</h3>
+            <h3 className="font-semibold text-[#EDEEF0] text-sm">{character.name}</h3>
             {character.confirmed && (
               <span>
                 <Badge variant="success" dot>已确认</Badge>
               </span>
             )}
           </div>
-          <p className="text-xs text-[#c8c8e0]">{character.age} · {character.role}</p>
+          <p className="text-xs text-[#B4B7BE]">{character.age} · {character.role}</p>
         </div>
       </div>
 
@@ -70,8 +70,8 @@ function CharacterCard({
           { label: '声音', value: character.voiceDesc },
         ].map(item => (
           <div key={item.label} className="flex gap-2">
-            <span className="text-[12px] text-[#ababc8] w-8 flex-shrink-0 pt-0.5">{item.label}</span>
-            <span className="text-[13px] text-[#d8d8ec] leading-snug">{item.value}</span>
+            <span className="text-[12px] text-[#8B8E96] w-8 flex-shrink-0 pt-0.5">{item.label}</span>
+            <span className="text-[13px] text-[#D2D5DB] leading-snug">{item.value}</span>
           </div>
         ))}
       </div>
@@ -212,12 +212,12 @@ export function Characters() {
         <div className="flex-1 overflow-y-auto">
           <div className="px-5 py-4">
             {/* Stats bar */}
-            <div className="flex items-center gap-4 mb-5 p-3 bg-[#0d0d1f] border border-white/[0.04] rounded-xl">
-              <Users className="w-4 h-4 text-[#b8b8cc]" />
-              <span className="text-xs text-[#c8c8e0]">共识别到 {characters.length} 个角色</span>
+            <div className="flex items-center gap-4 mb-5 p-3 bg-[#0F1219] border border-white/[0.04] rounded-xl">
+              <Users className="w-4 h-4 text-[#B4B7BE]" />
+              <span className="text-xs text-[#B4B7BE]">共识别到 {characters.length} 个角色</span>
               <span className="flex-1" />
-              <span className="text-xs text-[#ededff] font-medium">{confirmedCount}</span>
-              <span className="text-xs text-[#b8b8cc]">/ {characters.length} 已确认</span>
+              <span className="text-xs text-[#EDEEF0] font-medium">{confirmedCount}</span>
+              <span className="text-xs text-[#B4B7BE]">/ {characters.length} 已确认</span>
               <div className="w-24 h-1 bg-white/[0.06] rounded-full overflow-hidden">
                 <motion.div
                   className="h-full bg-emerald-500 rounded-full"

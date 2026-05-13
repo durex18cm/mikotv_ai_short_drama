@@ -39,8 +39,8 @@ export function ScriptAnalysis() {
             { label: '旁白', value: '9' },
           ].map(item => (
             <div key={item.label} className="flex items-center gap-1.5">
-              <span className="text-sm font-semibold text-[#ededff]">{item.value}</span>
-              <span className="text-xs text-[#b8b8cc]">{item.label}</span>
+              <span className="text-sm font-semibold text-[#EDEEF0]">{item.value}</span>
+              <span className="text-xs text-[#B4B7BE]">{item.label}</span>
             </div>
           ))}
           <div className="flex-1" />
@@ -57,8 +57,8 @@ export function ScriptAnalysis() {
                   className={cn(
                     'w-full text-left px-3 py-2 flex items-center gap-2 transition-colors',
                     selectedEp === ep.id
-                      ? 'text-[#ededff] bg-white/[0.04]'
-                      : 'text-[#b8b8cc] hover:text-[#d8d8ec]'
+                      ? 'text-[#EDEEF0] bg-white/[0.04]'
+                      : 'text-[#B4B7BE] hover:text-[#D2D5DB]'
                   )}
                 >
                   <ChevronRight className={cn('w-3 h-3 transition-transform flex-shrink-0', selectedEp === ep.id && 'rotate-90')} />
@@ -68,7 +68,7 @@ export function ScriptAnalysis() {
                   .filter(s => s.episodeId === ep.id)
                   .map(scene => (
                     <div key={scene.id} className="pl-6 pr-3 py-1.5">
-                      <p className="text-[13px] text-[#b8b8cc] truncate">{scene.title}</p>
+                      <p className="text-[13px] text-[#B4B7BE] truncate">{scene.title}</p>
                     </div>
                   ))
                 }
@@ -96,21 +96,21 @@ export function ScriptAnalysis() {
                 )}
               >
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-[12px] font-mono text-[#b8b8cc]">
+                  <span className="text-[12px] font-mono text-[#B4B7BE]">
                     SHOT {String(shot.num).padStart(2, '0')}
                   </span>
                   <Badge variant="muted">{shot.type}</Badge>
                 </div>
-                <p className="text-xs text-[#eaeaf8] leading-snug line-clamp-2">{shot.description}</p>
+                <p className="text-xs text-[#EDEEF0] leading-snug line-clamp-2">{shot.description}</p>
                 {(shot.dialogue || shot.narrator) && (
-                  <p className="text-[12px] text-[#b8b8cc] mt-1 line-clamp-1 italic">
+                  <p className="text-[12px] text-[#B4B7BE] mt-1 line-clamp-1 italic">
                     {shot.dialogue ? `"${shot.dialogue}"` : shot.narrator}
                   </p>
                 )}
                 <div className="flex items-center gap-2 mt-1.5">
-                  <span className="text-[12px] text-[#9494b4]">{shot.duration}s</span>
+                  <span className="text-[12px] text-[#5E6068]">{shot.duration}s</span>
                   {shot.characters.length > 0 && (
-                    <span className="text-[12px] text-[#9494b4]">· {shot.characters.join('、')}</span>
+                    <span className="text-[12px] text-[#5E6068]">· {shot.characters.join('、')}</span>
                   )}
                 </div>
               </motion.button>
@@ -118,12 +118,12 @@ export function ScriptAnalysis() {
           </motion.div>
 
           {/* Detail panel */}
-          <div className="overflow-y-auto p-4 space-y-4 bg-[#0d0d1f]/40">
+          <div className="overflow-y-auto p-4 space-y-4 bg-[#0F1219]/40">
             <div className="flex items-center justify-between">
-              <p className="text-[12px] text-[#9494b4] uppercase tracking-widest font-medium">镜头详情</p>
+              <p className="text-[12px] text-[#5E6068] uppercase tracking-widest font-medium">镜头详情</p>
               <button
                 onClick={() => setEditing(!editing)}
-                className="flex items-center gap-1 text-[13px] text-[#c0c0da] hover:text-[#F06292] transition-colors"
+                className="flex items-center gap-1 text-[13px] text-[#B4B7BE] hover:text-[#F06292] transition-colors"
               >
                 <Edit3 className="w-3 h-3" />
                 {editing ? '取消' : '编辑'}
@@ -141,13 +141,13 @@ export function ScriptAnalysis() {
                 { label: '背景音乐', value: selectedShot.music || '—' },
               ].map(item => (
                 <div key={item.label}>
-                  <p className="text-[12px] text-[#ababc8] mb-0.5">{item.label}</p>
-                  <p className="text-xs text-[#eaeaf8]">{item.value}</p>
+                  <p className="text-[12px] text-[#8B8E96] mb-0.5">{item.label}</p>
+                  <p className="text-xs text-[#EDEEF0]">{item.value}</p>
                 </div>
               ))}
 
               <div>
-                <p className="text-[12px] text-[#ababc8] mb-1">画面描述</p>
+                <p className="text-[12px] text-[#8B8E96] mb-1">画面描述</p>
                 {editing ? (
                   <div className="space-y-2">
                     <Textarea
@@ -160,20 +160,20 @@ export function ScriptAnalysis() {
                     </Button>
                   </div>
                 ) : (
-                  <p className="text-xs text-[#eaeaf8] leading-relaxed">{editDesc}</p>
+                  <p className="text-xs text-[#EDEEF0] leading-relaxed">{editDesc}</p>
                 )}
               </div>
 
               {selectedShot.dialogue && (
                 <div>
-                  <p className="text-[12px] text-[#ababc8] mb-0.5">台词</p>
-                  <p className="text-xs text-[#eaeaf8] italic">"{selectedShot.dialogue}"</p>
+                  <p className="text-[12px] text-[#8B8E96] mb-0.5">台词</p>
+                  <p className="text-xs text-[#EDEEF0] italic">"{selectedShot.dialogue}"</p>
                 </div>
               )}
               {selectedShot.narrator && (
                 <div>
-                  <p className="text-[12px] text-[#ababc8] mb-0.5">旁白</p>
-                  <p className="text-xs text-[#eaeaf8]">{selectedShot.narrator}</p>
+                  <p className="text-[12px] text-[#8B8E96] mb-0.5">旁白</p>
+                  <p className="text-xs text-[#EDEEF0]">{selectedShot.narrator}</p>
                 </div>
               )}
             </div>

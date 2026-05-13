@@ -14,10 +14,19 @@ html, body, #root {
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: #07070f;
-  color: #ededff;
+  background: #0B0D12;
+  color: #EDEEF0;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
 }
 
 /* Scrollbar */
@@ -38,13 +47,13 @@ body {
 
 /* Selection */
 ::selection {
-  background: rgba(233, 30, 99, 0.3);
-  color: #ededff;
+  background: rgba(236, 72, 153, 0.3);
+  color: #EDEEF0;
 }
 
 /* Focus ring */
 :focus-visible {
-  outline: 2px solid rgba(233, 30, 99, 0.6);
+  outline: 2px solid rgba(236, 72, 153, 0.5);
   outline-offset: 2px;
 }
 
@@ -79,7 +88,7 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #F06292, #E91E63);
+  background: linear-gradient(135deg, #F472B6, #EC4899);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

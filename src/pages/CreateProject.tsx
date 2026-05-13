@@ -96,7 +96,7 @@ export function CreateProject() {
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-[#111128] border border-white/[0.06] rounded-2xl overflow-hidden"
+              className="bg-[#12151C] border border-white/[0.06] rounded-2xl overflow-hidden"
             >
               <div className="p-6 border-b border-white/[0.04]">
                 <div className="flex items-center gap-3">
@@ -104,8 +104,8 @@ export function CreateProject() {
                     <FolderOpen className="w-5 h-5 text-[#F06292]" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold text-[#ededff]">新建短剧项目</h3>
-                    <p className="text-xs text-[#b8b8cc] mt-0.5">所有字段均有默认推荐值，可直接点击创建</p>
+                    <h3 className="text-sm font-semibold text-[#EDEEF0]">新建短剧项目</h3>
+                    <p className="text-xs text-[#B4B7BE] mt-0.5">所有字段均有默认推荐值，可直接点击创建</p>
                   </div>
                 </div>
               </div>
@@ -120,7 +120,7 @@ export function CreateProject() {
                   >
                     <div className="flex items-start gap-6">
                       <div className="w-24 flex-shrink-0 pt-2">
-                        <Label className="text-[#d8d8ec]">{field.label}</Label>
+                        <Label className="text-[#D2D5DB]">{field.label}</Label>
                         <p className="text-[12px] text-[#444488] mt-0.5 leading-snug">{field.desc}</p>
                       </div>
                       <div className="flex-1">{field.node}</div>
@@ -131,7 +131,7 @@ export function CreateProject() {
 
               {/* Preview */}
               <div className="mx-6 mb-6 bg-[#0d0d22] border border-white/[0.04] rounded-xl p-4">
-                <p className="text-[12px] text-[#9494b4] uppercase tracking-widest mb-3 font-medium">项目预览</p>
+                <p className="text-[12px] text-[#5E6068] uppercase tracking-widest mb-3 font-medium">项目预览</p>
                 <div className="grid grid-cols-2 gap-3">
                   {[
                     ['作品名称', form.name || '—'],
@@ -142,8 +142,8 @@ export function CreateProject() {
                     ['配音语言', form.language === '中文' ? '普通话' : 'English'],
                   ].map(([k, v]) => (
                     <div key={k}>
-                      <p className="text-[12px] text-[#ababc8]">{k}</p>
-                      <p className="text-xs text-[#ededff] font-medium mt-0.5">{v}</p>
+                      <p className="text-[12px] text-[#8B8E96]">{k}</p>
+                      <p className="text-xs text-[#EDEEF0] font-medium mt-0.5">{v}</p>
                     </div>
                   ))}
                 </div>

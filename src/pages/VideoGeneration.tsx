@@ -73,14 +73,14 @@ export function VideoGeneration() {
                 'px-3 py-1.5 rounded-md text-xs font-medium transition-all',
                 selectedEp === ep.id
                   ? 'bg-[#E91E63]/20 text-[#F48FB1]'
-                  : 'text-[#b8b8cc] hover:text-[#d8d8ec]'
+                  : 'text-[#B4B7BE] hover:text-[#D2D5DB]'
               )}
             >
               第 {ep.num} 集
             </button>
           ))}
           <div className="flex-1" />
-          <span className="text-xs text-[#b8b8cc]">{doneCount} / {shots.length} 已生成</span>
+          <span className="text-xs text-[#B4B7BE]">{doneCount} / {shots.length} 已生成</span>
           <Button variant="secondary" size="sm" onClick={generateAll} disabled={generating || allDone}>
             <Video className="w-3.5 h-3.5" />
             {allDone ? '已全部生成' : '生成全部视频'}
@@ -184,7 +184,7 @@ export function VideoGeneration() {
                         {videoStatus === 'idle' ? '未生成' : videoStatus === 'generating' ? '生成中' : videoStatus === 'done' ? '已生成' : '失败'}
                       </Badge>
                       {videoStatus !== 'idle' && (
-                        <button onClick={() => regenerateShot(shot.id)} className="p-1 rounded hover:bg-white/[0.08] text-[#b8b8cc] hover:text-[#d8d8ec] transition-colors">
+                        <button onClick={() => regenerateShot(shot.id)} className="p-1 rounded hover:bg-white/[0.08] text-[#B4B7BE] hover:text-[#D2D5DB] transition-colors">
                           <RotateCcw className="w-3 h-3" />
                         </button>
                       )}
@@ -194,7 +194,7 @@ export function VideoGeneration() {
                         </Button>
                       )}
                     </div>
-                    <p className="text-[11px] text-[#b8b8cc] line-clamp-2 leading-snug">{shot.description}</p>
+                    <p className="text-[11px] text-[#B4B7BE] line-clamp-2 leading-snug">{shot.description}</p>
                   </div>
                 </motion.div>
               )

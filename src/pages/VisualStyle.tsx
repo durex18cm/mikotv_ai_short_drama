@@ -89,15 +89,15 @@ export function VisualStyle() {
                     {/* Info */}
                     <div className={cn(
                       'p-4 transition-colors',
-                      isSelected ? 'bg-[#E91E63]/[0.06]' : 'bg-[#111128]'
+                      isSelected ? 'bg-[#E91E63]/[0.06]' : 'bg-[#12151C]'
                     )}>
                       <h3 className={cn(
                         'text-sm font-semibold mb-1 transition-colors',
-                        isSelected ? 'text-[#F48FB1]' : 'text-[#ededff]'
+                        isSelected ? 'text-[#F48FB1]' : 'text-[#EDEEF0]'
                       )}>
                         {style.name}
                       </h3>
-                      <p className="text-[13px] text-[#b8b8cc] leading-snug">{style.description}</p>
+                      <p className="text-[13px] text-[#B4B7BE] leading-snug">{style.description}</p>
                     </div>
                   </motion.button>
                 )
@@ -111,11 +111,11 @@ export function VisualStyle() {
                 variants={panelRevealVariants}
                 initial="hidden"
                 animate="show"
-                className="bg-[#111128] border border-[#EC407A]/20 rounded-xl p-5"
+                className="bg-[#12151C] border border-[#EC407A]/20 rounded-xl p-5"
               >
                 <div className="flex items-center gap-2 mb-3">
                   <Palette className="w-4 h-4 text-[#F06292]" />
-                  <p className="text-xs font-medium text-[#ededff]">已选风格 · 全片统一配置</p>
+                  <p className="text-xs font-medium text-[#EDEEF0]">已选风格 · 全片统一配置</p>
                   <Badge variant="violet">已选择</Badge>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -128,8 +128,8 @@ export function VisualStyle() {
                     { label: '字幕方案', value: '默认开启' },
                   ].map(item => (
                     <div key={item.label}>
-                      <p className="text-[12px] text-[#ababc8]">{item.label}</p>
-                      <p className="text-xs text-[#eaeaf8] font-medium mt-0.5">{item.value}</p>
+                      <p className="text-[12px] text-[#8B8E96]">{item.label}</p>
+                      <p className="text-xs text-[#EDEEF0] font-medium mt-0.5">{item.value}</p>
                     </div>
                   ))}
                 </div>
