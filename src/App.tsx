@@ -1,6 +1,8 @@
+import { AnimatePresence, motion } from 'framer-motion'
 import { AppProvider, useApp } from '@/context/AppContext'
 import { AppShell } from '@/components/layout/AppShell'
 import { TooltipProvider } from '@/components/ui/tooltip'
+import { pageVariants } from '@/lib/animations'
 import { Dashboard } from '@/pages/Dashboard'
 import { CreateProject } from '@/pages/CreateProject'
 import { UploadScript } from '@/pages/UploadScript'
@@ -34,17 +36,36 @@ function AppContent() {
   const { state } = useApp()
   const { currentStep } = state
 
+  let body: React.ReactNode
+  let phaseKey: 'dashboard' | 'wizard'
+
   if (currentStep === 0) {
-    return <Dashboard />
+    body = <Dashboard />
+    phaseKey = 'dashboard'
+  } else {
+    const PageComponent = STEP_PAGES[currentStep]
+    if (!PageComponent) return null
+    body = (
+      <AppShell>
+        <PageComponent />
+      </AppShell>
+    )
+    phaseKey = 'wizard'
   }
 
-  const PageComponent = STEP_PAGES[currentStep]
-  if (!PageComponent) return null
-
   return (
-    <AppShell>
-      <PageComponent />
-    </AppShell>
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div
+        key={phaseKey}
+        variants={pageVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        className="h-full"
+      >
+        {body}
+      </motion.div>
+    </AnimatePresence>
   )
 }
 
