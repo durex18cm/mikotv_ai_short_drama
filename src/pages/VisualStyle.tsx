@@ -49,17 +49,23 @@ export function VisualStyle() {
                   >
                     {/* Preview */}
                     <div
-                      className="h-32 relative flex items-end p-3"
+                      className="relative aspect-[16/9] flex items-end p-3 overflow-hidden"
                       style={{ background: style.gradient }}
                     >
+                      <img
+                        src={style.imageUrl}
+                        alt={`${style.name}预览`}
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/5" />
                       {/* Scan lines effect */}
                       <div
-                        className="absolute inset-0 opacity-10"
+                        className="absolute inset-0 opacity-10 mix-blend-screen"
                         style={{
                           backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)',
                         }}
                       />
-                      <div className="absolute top-3 right-3">
+                      <div className="absolute top-3 right-3 z-10">
                         {isSelected && (
                           <div
                             className="w-6 h-6 rounded-full bg-[#E91E63] flex items-center justify-center shadow-lg"
@@ -68,7 +74,7 @@ export function VisualStyle() {
                           </div>
                         )}
                       </div>
-                      <div className="relative flex flex-wrap gap-1">
+                      <div className="relative z-10 flex flex-wrap gap-1">
                         {style.tags.map(tag => (
                           <span
                             key={tag}

@@ -71,6 +71,7 @@ export interface VisualStyle {
   name: string
   description: string
   tags: string[]
+  imageUrl: string
   gradient: string
   accentColor: string
 }
