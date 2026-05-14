@@ -35,7 +35,7 @@ function VoiceCard({
   }
 
   return (
-    <div className="bg-[#12151C] border border-white/[0.06] rounded-xl p-4 flex flex-col relative overflow-hidden">
+    <div className="bg-[#1F2330] border border-white/[0.06] rounded-xl p-4 flex flex-col relative overflow-hidden">
       {/* Per-card progress bar shown while this character is being generated */}
       {generating && (
         <div className="absolute top-0 inset-x-0 h-0.5 bg-white/[0.06] overflow-hidden">
@@ -250,7 +250,7 @@ export function VoiceSubtitle() {
                 {/* Narrator card */}
                 <motion.div
                   variants={gridItemVariants}
-                  className="bg-[#12151C] border border-white/[0.06] rounded-xl p-4 flex flex-col relative overflow-hidden"
+                  className="bg-[#1F2330] border border-white/[0.06] rounded-xl p-4 flex flex-col relative overflow-hidden"
                 >
                   {currentGenCharId === 'narrator' && (
                     <div className="absolute top-0 inset-x-0 h-0.5 bg-white/[0.06] overflow-hidden">
@@ -287,7 +287,7 @@ export function VoiceSubtitle() {
 
             {/* Generate button — pinned at bottom, only shown when not yet generated */}
             {!voiceGenerated && (
-              <div className="flex-shrink-0 px-4 md:px-5 py-3 md:py-4 border-t border-white/[0.05] flex justify-center bg-[#0B0D12]/60">
+              <div className="flex-shrink-0 px-4 md:px-5 py-3 md:py-4 border-t border-white/[0.05] flex justify-center bg-[#12151C]/60">
                 <Button
                   size="lg"
                   onClick={generateAll}

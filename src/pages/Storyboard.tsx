@@ -205,7 +205,7 @@ export function Storyboard() {
 
           {/* Detail panel */}
           <div className={cn(
-            'overflow-y-auto p-4 space-y-4 bg-[#0F1219]/40 h-full',
+            'overflow-y-auto p-4 space-y-4 bg-[#181B24]/40 h-full',
             'md:block',
             mobileTab === 'detail' ? 'block' : 'hidden'
           )}>

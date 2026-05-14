@@ -20,7 +20,7 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
     <motion.div
       whileHover={{ y: -2 }}
       transition={{ duration: 0.15 }}
-      className="bg-[#12151C] border border-white/[0.06] rounded-xl p-5 cursor-pointer hover:border-white/[0.1] hover:bg-[#181B24] transition-all duration-200 group"
+      className="bg-[#1F2330] border border-white/[0.06] rounded-xl p-5 cursor-pointer hover:border-white/[0.1] hover:bg-[#181B24] transition-all duration-200 group"
       onClick={onOpen}
     >
       <div className="flex items-start justify-between mb-3">
@@ -69,7 +69,7 @@ export function Dashboard() {
   }
 
   return (
-    <div className="min-h-full bg-[#0B0D12]">
+    <div className="min-h-full bg-[#12151C]">
       {/* Nav */}
       <header className="border-b border-white/[0.05] px-8 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -117,7 +117,7 @@ export function Dashboard() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="bg-[#0F1219] border border-white/[0.05] rounded-2xl p-6 mb-12"
+          className="bg-[#181B24] border border-white/[0.05] rounded-2xl p-6 mb-12"
         >
           <p className="text-[13px] text-[#5E6068] uppercase tracking-widest mb-4 font-medium">创作流程</p>
           <div className="flex items-center gap-0 overflow-x-auto">

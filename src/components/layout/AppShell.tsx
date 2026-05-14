@@ -29,7 +29,7 @@ function DesktopHeader() {
 
   return (
     <header
-      className="hidden md:flex h-13 items-center px-5 border-b border-white/[0.05] bg-[#0F1219]/80 backdrop-blur-sm flex-shrink-0"
+      className="hidden md:flex h-13 items-center px-5 border-b border-white/[0.05] bg-[#181B24]/80 backdrop-blur-sm flex-shrink-0"
       style={{ height: '52px' }}
     >
       <div className="flex-1 flex items-center gap-2 min-w-0">
@@ -65,7 +65,7 @@ function MobileTopBar({ onOpenMenu }: { onOpenMenu: () => void }) {
 
   return (
     <header
-      className="md:hidden flex-shrink-0 bg-[#0F1219]/95 backdrop-blur-md border-b border-white/[0.05]"
+      className="md:hidden flex-shrink-0 bg-[#181B24]/95 backdrop-blur-md border-b border-white/[0.05]"
       style={{ paddingTop: 'env(safe-area-inset-top)' }}
     >
       <div className="h-12 flex items-center px-2 gap-1">
@@ -157,7 +157,7 @@ export function AppShell({ children }: AppShellProps) {
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   return (
-    <div className="flex h-full overflow-hidden bg-[#0B0D12]">
+    <div className="flex h-full overflow-hidden bg-[#12151C]">
       {/* Desktop sidebar */}
       <div className="hidden md:flex flex-shrink-0">
         <Sidebar />
@@ -215,7 +215,7 @@ export function PageLayout({
 export function ActionBar({ children }: { children: ReactNode }) {
   return (
     <div
-      className="flex items-center justify-between gap-2 px-3 md:px-6 py-2.5 md:py-3 border-t border-white/[0.05] bg-[#0F1219]/80 md:bg-[#0F1219]/60 backdrop-blur-sm flex-shrink-0"
+      className="flex items-center justify-between gap-2 px-3 md:px-6 py-2.5 md:py-3 border-t border-white/[0.05] bg-[#181B24]/80 md:bg-[#181B24]/60 backdrop-blur-sm flex-shrink-0"
       style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 0.625rem)' }}
     >
       {children}

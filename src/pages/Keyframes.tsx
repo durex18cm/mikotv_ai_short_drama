@@ -253,7 +253,7 @@ export function Keyframes() {
                   return (
                     <div className="rounded-2xl overflow-hidden border border-white/10">
                       <ShotPlaceholder shotNum={shot.num} episodeNum={epNum} status="done" imageUrl={getShotImageUrl(shot)} className="w-full" />
-                      <div className="bg-[#12151C] p-4">
+                      <div className="bg-[#1F2330] p-4">
                         <p className="text-xs font-mono text-[#B4B7BE] mb-1">SHOT {String(shot.num).padStart(2, '0')}</p>
                         <p className="text-sm text-[#EDEEF0] leading-relaxed">{shot.description}</p>
                         <Button variant="ghost" size="sm" className="mt-3 w-full" onClick={() => setLightbox(null)}>

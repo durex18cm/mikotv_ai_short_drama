@@ -66,7 +66,7 @@ export function Export() {
                 variants={panelRevealVariants}
                 initial="hidden"
                 animate="show"
-                className="bg-[#12151C] border border-white/[0.06] rounded-2xl p-5"
+                className="bg-[#1F2330] border border-white/[0.06] rounded-2xl p-5"
               >
                 <p className="text-[12px] text-[#5E6068] uppercase tracking-widest font-medium mb-4">导出设置</p>
                 <div className="space-y-4">
@@ -117,7 +117,7 @@ export function Export() {
                 variants={panelRevealVariants}
                 initial="hidden"
                 animate="show"
-                className="bg-[#12151C] border border-white/[0.06] rounded-2xl p-5"
+                className="bg-[#1F2330] border border-white/[0.06] rounded-2xl p-5"
               >
                 <p className="text-[12px] text-[#5E6068] uppercase tracking-widest font-medium mb-4">导出预览</p>
                 <motion.div
@@ -164,7 +164,7 @@ export function Export() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="bg-[#12151C] border border-white/[0.06] rounded-2xl p-8 flex flex-col items-center justify-center gap-4 min-h-[260px]"
+                    className="bg-[#1F2330] border border-white/[0.06] rounded-2xl p-8 flex flex-col items-center justify-center gap-4 min-h-[260px]"
                   >
                     <div className="w-14 h-14 rounded-2xl bg-[#E91E63]/10 border border-[#EC407A]/20 flex items-center justify-center">
                       <Film className="w-7 h-7 text-[#F06292]" />
@@ -182,7 +182,7 @@ export function Export() {
                     initial={{ opacity: 0, scale: 0.96 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
-                    className="bg-[#12151C] border border-[#EC407A]/25 rounded-2xl p-6 min-h-[260px] flex flex-col justify-center gap-5"
+                    className="bg-[#1F2330] border border-[#EC407A]/25 rounded-2xl p-6 min-h-[260px] flex flex-col justify-center gap-5"
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl bg-[#E91E63]/10 flex items-center justify-center flex-shrink-0">

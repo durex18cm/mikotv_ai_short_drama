@@ -33,7 +33,7 @@ export function DialogContent({
       <DialogPrimitive.Content
         className={cn(
           'fixed left-[50%] top-[50%] z-50 translate-x-[-50%] translate-y-[-50%]',
-          'w-full max-w-lg bg-[#12151C] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/50',
+          'w-full max-w-lg bg-[#1F2330] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/50',
           'data-[state=open]:animate-in data-[state=closed]:animate-out',
           'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
           'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',

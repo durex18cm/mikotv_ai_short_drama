@@ -17,13 +17,13 @@ export function GeneratingOverlay({ visible, phase, progress, title = 'AI 正在
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="absolute inset-0 z-20 bg-[#0B0D12]/80 backdrop-blur-sm rounded-xl flex items-center justify-center"
+          className="absolute inset-0 z-20 bg-[#12151C]/80 backdrop-blur-sm rounded-xl flex items-center justify-center"
         >
           <motion.div
             initial={{ scale: 0.92, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.92, opacity: 0 }}
-            className="bg-[#12151C] border border-white/[0.08] rounded-2xl p-8 w-80 flex flex-col items-center gap-4"
+            className="bg-[#1F2330] border border-white/[0.08] rounded-2xl p-8 w-80 flex flex-col items-center gap-4"
           >
             <div className="relative">
               <div className="w-12 h-12 rounded-xl bg-[#E91E63]/10 border border-[#EC407A]/20 flex items-center justify-center">

@@ -42,7 +42,7 @@ function CharacterCard({
   return (
     <div
       className={cn(
-        'bg-[#12151C] border rounded-2xl p-5 transition-all duration-200',
+        'bg-[#1F2330] border rounded-2xl p-5 transition-all duration-200',
         character.confirmed
           ? 'border-emerald-500/30 shadow-sm shadow-emerald-500/5'
           : 'border-white/[0.06] hover:border-white/[0.1]'
@@ -246,7 +246,7 @@ export function Characters() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 z-20 bg-[#0B0D12]/85 backdrop-blur-sm flex items-center justify-center px-6"
+              className="absolute inset-0 z-20 bg-[#12151C]/85 backdrop-blur-sm flex items-center justify-center px-6"
             >
               <div className="w-full max-w-md">
                 <div className="flex flex-col items-center text-center gap-4 mb-6">
@@ -287,7 +287,7 @@ export function Characters() {
         <div className="flex-1 overflow-y-auto">
           <div className="px-4 md:px-5 py-4">
             {/* Stats bar */}
-            <div className="flex items-center gap-2 md:gap-4 mb-4 md:mb-5 p-3 bg-[#0F1219] border border-white/[0.04] rounded-xl">
+            <div className="flex items-center gap-2 md:gap-4 mb-4 md:mb-5 p-3 bg-[#181B24] border border-white/[0.04] rounded-xl">
               <Users className="w-4 h-4 text-[#B4B7BE] flex-shrink-0" />
               <span className="text-xs text-[#B4B7BE] flex-shrink-0">{characters.length} 个角色</span>
               <span className="flex-1" />

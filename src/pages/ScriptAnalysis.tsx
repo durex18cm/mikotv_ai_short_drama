@@ -76,7 +76,7 @@ export function ScriptAnalysis() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 z-20 bg-[#0B0D12]/85 backdrop-blur-sm flex items-center justify-center px-6"
+              className="absolute inset-0 z-20 bg-[#12151C]/85 backdrop-blur-sm flex items-center justify-center px-6"
             >
               <div className="w-full max-w-md">
                 <div className="flex flex-col items-center text-center gap-4 mb-6">
@@ -233,7 +233,7 @@ export function ScriptAnalysis() {
 
           {/* Detail panel */}
           <div className={cn(
-            'overflow-y-auto p-4 space-y-4 bg-[#0F1219]/40 h-full',
+            'overflow-y-auto p-4 space-y-4 bg-[#181B24]/40 h-full',
             'md:block',
             mobileTab === 'detail' ? 'block' : 'hidden'
           )}>

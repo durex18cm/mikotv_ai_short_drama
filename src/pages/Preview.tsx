@@ -157,7 +157,7 @@ export function Preview() {
                   exit={{ opacity: 0, y: 8, height: 0 }}
                   className="w-full max-w-[520px] overflow-hidden"
                 >
-                  <div className="bg-[#12151C] border border-[#EC407A]/20 rounded-2xl p-5">
+                  <div className="bg-[#1F2330] border border-[#EC407A]/20 rounded-2xl p-5">
                     <div className="flex items-center justify-between mb-4">
                       <div>
                         <p className="text-xs font-semibold text-[#EDEEF0]">

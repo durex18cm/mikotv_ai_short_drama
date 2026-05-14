@@ -253,7 +253,7 @@ export function UploadScript() {
 
                   {imageUrl ? (
                     <div className="space-y-3">
-                      <div className="relative rounded-xl overflow-hidden border border-white/[0.08] bg-[#12151C] group">
+                      <div className="relative rounded-xl overflow-hidden border border-white/[0.08] bg-[#1F2330] group">
                         <img src={imageUrl} alt="参考图" className="w-full aspect-video md:aspect-[9/16] object-cover" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                         <div className="absolute top-2 right-2 flex items-center gap-1.5">

@@ -39,7 +39,7 @@ export function Sidebar({
   const { currentStep, stepStatuses, project } = state
 
   return (
-    <aside className="w-full md:w-56 h-full bg-[#0F1219] border-r border-white/[0.05] flex flex-col">
+    <aside className="w-full md:w-56 h-full bg-[#181B24] border-r border-white/[0.05] flex flex-col">
       {/* Logo */}
       <div className="px-4 py-4 border-b border-white/[0.05] flex items-start gap-2">
         <div className="flex-1 min-w-0">

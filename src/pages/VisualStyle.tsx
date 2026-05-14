@@ -89,7 +89,7 @@ export function VisualStyle() {
                     {/* Info */}
                     <div className={cn(
                       'p-4 transition-colors',
-                      isSelected ? 'bg-[#E91E63]/[0.06]' : 'bg-[#12151C]'
+                      isSelected ? 'bg-[#E91E63]/[0.06]' : 'bg-[#1F2330]'
                     )}>
                       <h3 className={cn(
                         'text-sm font-semibold mb-1 transition-colors',
@@ -111,7 +111,7 @@ export function VisualStyle() {
                 variants={panelRevealVariants}
                 initial="hidden"
                 animate="show"
-                className="bg-[#12151C] border border-[#EC407A]/20 rounded-xl p-5"
+                className="bg-[#1F2330] border border-[#EC407A]/20 rounded-xl p-5"
               >
                 <div className="flex items-center gap-2 mb-3">
                   <Palette className="w-4 h-4 text-[#F06292]" />

@@ -116,7 +116,7 @@ export function AutoEdit() {
               <motion.div
                 key={item.label}
                 variants={gridItemVariants}
-                className="bg-[#12151C] border border-white/[0.06] rounded-xl p-4"
+                className="bg-[#1F2330] border border-white/[0.06] rounded-xl p-4"
               >
                 <div className="flex items-center gap-2 mb-2">
                   <item.icon className="w-4 h-4 text-[#B4B7BE]" />
@@ -150,7 +150,7 @@ export function AutoEdit() {
                   key={ep.id}
                   variants={gridItemVariants}
                   className={cn(
-                    'bg-[#12151C] border rounded-2xl overflow-hidden transition-colors',
+                    'bg-[#1F2330] border rounded-2xl overflow-hidden transition-colors',
                     isDone ? 'border-emerald-500/20' : isGenerating ? 'border-[#EC407A]/30' : 'border-white/[0.06]'
                   )}
                 >

@@ -96,7 +96,7 @@ export function CreateProject() {
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-[#12151C] border border-white/[0.06] rounded-2xl overflow-hidden"
+              className="bg-[#1F2330] border border-white/[0.06] rounded-2xl overflow-hidden"
             >
               <div className="p-5 md:p-6 border-b border-white/[0.04]">
                 <div className="flex items-center gap-3">
