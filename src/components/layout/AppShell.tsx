@@ -7,7 +7,7 @@ import { pageVariants } from '@/lib/animations'
 
 const STEP_LABELS: Record<number, string> = {
   1: '创建项目',
-  2: '上传剧本',
+  2: '选择短剧类型',
   3: '剧本解析',
   4: '确认角色',
   5: '视觉风格',

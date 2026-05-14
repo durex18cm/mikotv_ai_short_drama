@@ -9,7 +9,7 @@ import type { StepStatus } from '@/types'
 
 const STEPS = [
   { id: 1, label: '创建项目', icon: FolderOpen },
-  { id: 2, label: '上传剧本', icon: FileText },
+  { id: 2, label: '选择短剧类型', icon: FileText },
   { id: 3, label: '剧本解析', icon: Cpu },
   { id: 4, label: '确认角色', icon: Users },
   { id: 5, label: '视觉风格', icon: Palette },
