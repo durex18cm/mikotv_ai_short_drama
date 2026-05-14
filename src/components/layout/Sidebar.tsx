@@ -145,7 +145,7 @@ export function Sidebar({
       {/* Footer */}
       <div className="px-4 py-3 border-t border-white/[0.05]">
         <p className="text-[12px] text-[#3F4250] leading-relaxed">
-          剧本进，短剧出
+          创意进，短剧出
         </p>
       </div>
     </aside>

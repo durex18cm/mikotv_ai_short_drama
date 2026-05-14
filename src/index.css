@@ -115,3 +115,21 @@ h1, h2, h3 {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* Hero headline — rich brand gradient (pink → magenta → purple) */
+.hero-gradient {
+  background: linear-gradient(
+    120deg,
+    #F8BBD0 0%,
+    #F472B6 25%,
+    #EC4899 55%,
+    #E91E63 75%,
+    #9C27B0 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 24px rgba(236, 72, 153, 0.2));
+}

@@ -94,11 +94,11 @@ export function Dashboard() {
             <Sparkles className="w-3.5 h-3.5 text-[#F06292]" />
             <span className="text-xs text-[#F48FB1] font-medium">AI 驱动的短剧创作平台</span>
           </div>
-          <h1 className="text-4xl font-bold text-[#EDEEF0] mb-3 tracking-tight">
-            剧本进，<span className="gradient-text">短剧出</span>
+          <h1 className="text-4xl md:text-5xl font-bold mb-3 tracking-tight hero-gradient">
+            AI 一键创作
           </h1>
           <p className="text-[#B4B7BE] text-base max-w-md mx-auto leading-relaxed">
-            上传剧本，AI 自动完成解析、分镜、关键帧、视频生成、配音、字幕与剪辑合成
+            上传图片、创意，自动解析出大纲、剧本、分镜头、成片
           </p>
           <motion.div
             whileHover={{ scale: 1.03 }}
