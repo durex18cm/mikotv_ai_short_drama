@@ -119,29 +119,32 @@ export function Preview() {
     <PageLayout title="成片预览" description="观看完整短剧，点击镜头进行局部修改">
       <div className="flex flex-col h-full">
         {/* Episode selector */}
-        <div className="px-5 py-2 border-b border-white/[0.04] flex items-center gap-2 flex-shrink-0">
-          {MOCK_EPISODES.map(ep => (
-            <button
-              key={ep.id}
-              onClick={() => { setSelectedEpId(ep.id); setSelectedShot(null); void 0 }}
-              className={cn(
-                'px-3 py-1.5 rounded-md text-xs font-medium transition-all',
-                selectedEpId === ep.id
-                  ? 'bg-[#E91E63]/20 text-[#F48FB1]'
-                  : 'text-[#B4B7BE] hover:text-[#D2D5DB]'
-              )}
-            >
-              第 {ep.num} 集 · {ep.title}
-            </button>
-          ))}
+        <div className="px-4 md:px-5 py-2 border-b border-white/[0.04] flex items-center gap-2 flex-shrink-0 overflow-x-auto no-scrollbar">
+          <div className="flex gap-1 flex-shrink-0">
+            {MOCK_EPISODES.map(ep => (
+              <button
+                key={ep.id}
+                onClick={() => { setSelectedEpId(ep.id); setSelectedShot(null); void 0 }}
+                className={cn(
+                  'px-3 py-1.5 rounded-md text-xs font-medium transition-all whitespace-nowrap',
+                  selectedEpId === ep.id
+                    ? 'bg-[#E91E63]/20 text-[#F48FB1]'
+                    : 'text-[#B4B7BE] hover:text-[#D2D5DB]'
+                )}
+              >
+                <span className="hidden md:inline">第 {ep.num} 集 · {ep.title}</span>
+                <span className="md:hidden">第 {ep.num} 集</span>
+              </button>
+            ))}
+          </div>
           <div className="flex-1" />
           <Badge variant="success" dot>合成完成</Badge>
         </div>
 
-        <div className="flex-1 overflow-hidden grid grid-cols-[1fr_280px] divide-x divide-white/[0.04]">
+        <div className="flex-1 md:overflow-hidden overflow-y-auto md:grid md:grid-cols-[1fr_280px] md:divide-x md:divide-white/[0.04]">
           {/* Player area */}
-          <div className="overflow-y-auto p-5 flex flex-col items-center gap-5">
-            <div className="w-full max-w-[260px]">
+          <div className="md:overflow-y-auto p-4 md:p-5 flex flex-col items-center gap-4 md:gap-5">
+            <div className="w-full max-w-[240px] md:max-w-[260px]">
               <MockVideoPlayer episodeId={selectedEpId} selectedShot={selectedShot} />
             </div>
 
@@ -198,7 +201,7 @@ export function Preview() {
           </div>
 
           {/* Shot list */}
-          <div className="overflow-y-auto">
+          <div className="md:overflow-y-auto border-t md:border-t-0 border-white/[0.04]">
             <div className="p-3">
               <p className="text-[12px] text-[#5E6068] uppercase tracking-widest font-medium mb-2 px-1">
                 镜头列表 · 第 {ep.num} 集
@@ -263,12 +266,16 @@ export function Preview() {
         </div>
 
         <ActionBar>
-          <Button variant="ghost" onClick={() => dispatch({ type: 'PREV_STEP' })}>
+          <Button variant="ghost" size="icon" onClick={() => dispatch({ type: 'PREV_STEP' })} className="md:hidden flex-shrink-0" aria-label="上一步">
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
+          <Button variant="ghost" onClick={() => dispatch({ type: 'PREV_STEP' })} className="hidden md:inline-flex">
             <ArrowLeft className="w-4 h-4" />
             上一步
           </Button>
-          <Button onClick={() => dispatch({ type: 'NEXT_STEP' })}>
-            确认成片，导出视频
+          <Button onClick={() => dispatch({ type: 'NEXT_STEP' })} className="flex-1 md:flex-initial">
+            <span className="md:hidden">导出视频</span>
+            <span className="hidden md:inline">确认成片，导出视频</span>
             <ArrowRight className="w-4 h-4" />
           </Button>
         </ActionBar>

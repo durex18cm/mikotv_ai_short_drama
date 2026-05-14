@@ -67,11 +67,11 @@ const DRAMA_TYPES: DramaType[] = [
 ]
 
 const GENERATION_PHASES = [
-  { label: '分析参考图风格…', duration: 800 },
-  { label: '构思人设与背景…', duration: 900 },
-  { label: '拆解剧集与场景…', duration: 1000 },
-  { label: '生成台词与旁白…', duration: 1300 },
-  { label: '输出结构化剧本…', duration: 1000 },
+  { label: '分析参考图风格…', duration: 480 },
+  { label: '构思人设与背景…', duration: 540 },
+  { label: '拆解剧集与场景…', duration: 600 },
+  { label: '生成台词与旁白…', duration: 780 },
+  { label: '输出结构化剧本…', duration: 600 },
 ]
 
 type Phase = 'idle' | 'generating' | 'done'
@@ -79,6 +79,7 @@ type Phase = 'idle' | 'generating' | 'done'
 export function UploadScript() {
   const { state, dispatch } = useApp()
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const subSectionRef = useRef<HTMLDivElement>(null)
 
   const [imageUrl, setImageUrl] = useState<string | null>(null)
   const [selectedType, setSelectedType] = useState<string | null>(null)
@@ -122,6 +123,31 @@ export function UploadScript() {
     setCustomSub('')
     setCustomAppeal('')
   }
+
+  // Mobile: scroll subcategory section into view after the section actually mounts.
+  // AnimatePresence mode="wait" delays mount until the empty-state exit completes,
+  // so we poll via rAF until the ref is attached (works for both first and subsequent clicks).
+  useEffect(() => {
+    if (!selectedType) return
+    if (typeof window === 'undefined') return
+    if (!window.matchMedia('(max-width: 767px)').matches) return
+
+    let cancelled = false
+    let frames = 0
+    const maxFrames = 60 // ~1s safety cap
+    const tryScroll = () => {
+      if (cancelled) return
+      const node = subSectionRef.current
+      if (node) {
+        node.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      } else if (frames < maxFrames) {
+        frames++
+        requestAnimationFrame(tryScroll)
+      }
+    }
+    requestAnimationFrame(tryScroll)
+    return () => { cancelled = true }
+  }, [selectedType])
 
   function toggleSub(tag: string) {
     setSubcategories(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag])
@@ -207,10 +233,10 @@ export function UploadScript() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="h-full grid grid-cols-[340px_1fr] divide-x divide-white/[0.05]"
+                className="h-full grid grid-cols-1 md:grid-cols-[340px_1fr] md:divide-x divide-white/[0.05] overflow-y-auto md:overflow-hidden"
               >
                 {/* Left: image upload */}
-                <div className="flex flex-col p-5 gap-4 overflow-y-auto">
+                <div className="flex flex-col p-4 md:p-5 gap-4 md:overflow-y-auto border-b md:border-b-0 border-white/[0.05]">
                   <div className="flex items-center gap-2">
                     <ImagePlus className="w-4 h-4 text-[#B4B7BE]" />
                     <span className="text-xs font-medium text-[#D2D5DB]">参考图</span>
@@ -228,7 +254,7 @@ export function UploadScript() {
                   {imageUrl ? (
                     <div className="space-y-3">
                       <div className="relative rounded-xl overflow-hidden border border-white/[0.08] bg-[#12151C] group">
-                        <img src={imageUrl} alt="参考图" className="w-full aspect-[9/16] object-cover" />
+                        <img src={imageUrl} alt="参考图" className="w-full aspect-video md:aspect-[9/16] object-cover" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                         <div className="absolute top-2 right-2 flex items-center gap-1.5">
                           <button
@@ -255,7 +281,7 @@ export function UploadScript() {
                     <>
                       <button
                         onClick={pickImage}
-                        className="group relative aspect-[9/16] rounded-xl border border-dashed border-white/[0.12] hover:border-[#EC407A]/50 bg-white/[0.02] hover:bg-[#E91E63]/[0.04] transition-colors flex flex-col items-center justify-center gap-3 text-center px-6"
+                        className="group relative aspect-video md:aspect-[9/16] rounded-xl border border-dashed border-white/[0.12] hover:border-[#EC407A]/50 bg-white/[0.02] hover:bg-[#E91E63]/[0.04] transition-colors flex flex-col items-center justify-center gap-3 text-center px-6"
                       >
                         <div className="w-12 h-12 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center group-hover:border-[#EC407A]/40 group-hover:bg-[#E91E63]/10 transition-colors">
                           <ImagePlus className="w-5 h-5 text-[#8B8E96] group-hover:text-[#F06292]" />
@@ -276,8 +302,8 @@ export function UploadScript() {
                 </div>
 
                 {/* Right: type selection */}
-                <div className="flex flex-col overflow-y-auto">
-                  <div className="px-6 py-5 space-y-6">
+                <div className="flex flex-col md:overflow-y-auto">
+                  <div className="px-4 py-4 md:px-6 md:py-5 space-y-5 md:space-y-6">
                     {/* Type */}
                     <section>
                       <SectionHeader
@@ -285,7 +311,7 @@ export function UploadScript() {
                         title="选择类型"
                         hint="单选 · 决定故事大方向"
                       />
-                      <div className="grid grid-cols-5 gap-2 mt-3">
+                      <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 mt-3">
                         {DRAMA_TYPES.map(t => {
                           const active = selectedType === t.id
                           return (
@@ -310,10 +336,11 @@ export function UploadScript() {
                       {activeType ? (
                         <motion.div
                           key="sections"
+                          ref={subSectionRef}
                           initial="hidden"
                           animate="show"
                           exit="hidden"
-                          className="space-y-6"
+                          className="space-y-6 scroll-mt-2"
                         >
                           {/* Subcategory */}
                           <motion.section variants={panelRevealVariants}>
@@ -487,34 +514,47 @@ export function UploadScript() {
         <ActionBar>
           <Button
             variant="ghost"
+            size="icon"
             onClick={() => dispatch({ type: 'PREV_STEP' })}
             disabled={phase === 'generating'}
+            className="md:hidden flex-shrink-0"
+            aria-label="上一步"
+          >
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
+          <Button
+            variant="ghost"
+            onClick={() => dispatch({ type: 'PREV_STEP' })}
+            disabled={phase === 'generating'}
+            className="hidden md:inline-flex"
           >
             <ArrowLeft className="w-4 h-4" />
             上一步
           </Button>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-1 md:flex-initial justify-end">
             {phase === 'idle' && (
               <>
-                <SummaryHint
-                  type={activeType?.name}
-                  sub={subcategories.length}
-                  appeal={appeals.length}
-                />
-                <Button onClick={handleGenerate} disabled={!canGenerate}>
+                <div className="hidden md:block">
+                  <SummaryHint
+                    type={activeType?.name}
+                    sub={subcategories.length}
+                    appeal={appeals.length}
+                  />
+                </div>
+                <Button onClick={handleGenerate} disabled={!canGenerate} className="flex-1 md:flex-initial">
                   <Wand2 className="w-4 h-4" />
                   AI 生成剧本
                 </Button>
               </>
             )}
             {phase === 'generating' && (
-              <Button disabled>
+              <Button disabled className="flex-1 md:flex-initial">
                 <Wand2 className="w-4 h-4 animate-pulse" />
                 生成中…
               </Button>
             )}
             {phase === 'done' && (
-              <Button onClick={goToEdit}>
+              <Button onClick={goToEdit} className="flex-1 md:flex-initial">
                 进入剧本编辑
                 <ArrowRight className="w-4 h-4" />
               </Button>

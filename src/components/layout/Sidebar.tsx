@@ -3,6 +3,7 @@ import {
   FolderOpen, FileText, Cpu, Users, Palette, Layout,
   Image, Video, Mic, Film, Play, Download, Check, ChevronRight,
 } from 'lucide-react'
+import type { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 import { useApp } from '@/context/AppContext'
 import type { StepStatus } from '@/types'
@@ -27,27 +28,36 @@ function stepCanNavigate(stepId: number, statuses: StepStatus[]): boolean {
   return s === 'active' || s === 'completed'
 }
 
-export function Sidebar() {
+export function Sidebar({
+  onNavigate,
+  mobileCloseButton,
+}: {
+  onNavigate?: () => void
+  mobileCloseButton?: ReactNode
+} = {}) {
   const { state, dispatch } = useApp()
   const { currentStep, stepStatuses, project } = state
 
   return (
-    <aside className="w-56 flex-shrink-0 h-full bg-[#0F1219] border-r border-white/[0.05] flex flex-col">
+    <aside className="w-full md:w-56 h-full bg-[#0F1219] border-r border-white/[0.05] flex flex-col">
       {/* Logo */}
-      <div className="px-4 py-4 border-b border-white/[0.05]">
-        <div className="flex items-center gap-2">
-          <img
-            src="/images/favorite.png"
-            alt="Miko TV"
-            className="w-8 h-8 rounded-md flex-shrink-0 object-cover"
-          />
-          <span className="font-semibold text-sm text-[#EDEEF0] tracking-tight">Miko TV</span>
+      <div className="px-4 py-4 border-b border-white/[0.05] flex items-start gap-2">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2">
+            <img
+              src="/images/favorite.png"
+              alt="Miko TV"
+              className="w-8 h-8 rounded-md flex-shrink-0 object-cover"
+            />
+            <span className="font-semibold text-sm text-[#EDEEF0] tracking-tight">Miko TV</span>
+          </div>
+          {project && (
+            <p className="text-[13px] text-[#B4B7BE] mt-2 truncate leading-tight pl-9">
+              {project.name}
+            </p>
+          )}
         </div>
-        {project && (
-          <p className="text-[13px] text-[#B4B7BE] mt-2 truncate leading-tight pl-9">
-            {project.name}
-          </p>
-        )}
+        {mobileCloseButton}
       </div>
 
       {/* Steps */}
@@ -74,10 +84,14 @@ export function Sidebar() {
                 </div>
               )}
               <button
-                onClick={() => canClick && dispatch({ type: 'GO_TO_STEP', step: step.id })}
+                onClick={() => {
+                  if (!canClick) return
+                  dispatch({ type: 'GO_TO_STEP', step: step.id })
+                  onNavigate?.()
+                }}
                 disabled={!canClick}
                 className={cn(
-                  'w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-left transition-all duration-150 group relative',
+                  'w-full flex items-center gap-2.5 px-2.5 py-2.5 md:py-2 rounded-lg text-left transition-all duration-150 group relative',
                   isActive
                     ? 'bg-[#E91E63]/[0.12] text-[#EDEEF0]'
                     : isCompleted
@@ -109,7 +123,7 @@ export function Sidebar() {
                     <Icon className="w-3 h-3" />
                   )}
                 </div>
-                <span className="text-xs font-medium flex-1 leading-tight">{step.label}</span>
+                <span className="text-[13px] md:text-xs font-medium flex-1 leading-tight">{step.label}</span>
                 {isActive && (
                   <ChevronRight className="w-3 h-3 text-[#F06292] opacity-60" />
                 )}

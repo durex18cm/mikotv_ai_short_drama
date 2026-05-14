@@ -116,10 +116,7 @@ function reducer(state: AppState, action: AppAction): AppState {
 
     case 'CONFIRM_SCRIPT': {
       const statuses = advanceStatus(state.stepStatuses, 2)
-      // also complete step 3 since analysis comes right after
-      statuses[3] = 'completed'
-      statuses[4] = 'active'
-      return { ...state, currentStep: 4, stepStatuses: statuses }
+      return { ...state, currentStep: 3, stepStatuses: statuses }
     }
 
     case 'UPDATE_CHARACTER':

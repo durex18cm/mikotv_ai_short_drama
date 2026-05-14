@@ -26,9 +26,9 @@ export function VisualStyle() {
     >
       <div className="flex flex-col h-full">
         <div className="flex-1 overflow-y-auto">
-          <div className="px-5 py-4">
+          <div className="px-4 md:px-5 py-4">
             <motion.div
-              className="grid grid-cols-2 xl:grid-cols-3 gap-4 mb-5"
+              className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-4 mb-5"
               variants={gridContainerVariants}
               initial="hidden"
               animate="show"
@@ -118,7 +118,7 @@ export function VisualStyle() {
                   <p className="text-xs font-medium text-[#EDEEF0]">已选风格 · 全片统一配置</p>
                   <Badge variant="violet">已选择</Badge>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
                   {[
                     { label: '视觉风格', value: selected.name },
                     { label: '画面比例', value: '9:16 竖屏' },
@@ -139,11 +139,14 @@ export function VisualStyle() {
         </div>
 
         <ActionBar>
-          <Button variant="ghost" onClick={() => dispatch({ type: 'PREV_STEP' })}>
+          <Button variant="ghost" size="icon" onClick={() => dispatch({ type: 'PREV_STEP' })} className="md:hidden flex-shrink-0" aria-label="上一步">
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
+          <Button variant="ghost" onClick={() => dispatch({ type: 'PREV_STEP' })} className="hidden md:inline-flex">
             <ArrowLeft className="w-4 h-4" />
             上一步
           </Button>
-          <Button onClick={confirmStyle} disabled={!selectedStyle}>
+          <Button onClick={confirmStyle} disabled={!selectedStyle} className="flex-1 md:flex-initial">
             确认风格，生成分镜
             <ArrowRight className="w-4 h-4" />
           </Button>

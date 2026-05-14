@@ -57,10 +57,10 @@ export function Export() {
       <div className="flex flex-col h-full">
         <div className="flex-1 overflow-y-auto">
           {/* Two-column layout: settings left, status right */}
-          <div className="px-5 py-6 grid grid-cols-1 lg:grid-cols-2 gap-5 items-start max-w-5xl">
+          <div className="px-4 md:px-5 py-4 md:py-6 grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-5 items-start max-w-5xl">
 
-            {/* LEFT: Settings + Preview */}
-            <div className="space-y-5">
+            {/* LEFT: Settings + Preview — hidden on mobile during export/done so status is the focus */}
+            <div className={cn('space-y-5', (exporting || done) && 'hidden md:block')}>
               {/* Settings card */}
               <motion.div
                 variants={panelRevealVariants}
@@ -251,17 +251,20 @@ export function Export() {
         </div>
 
         <ActionBar>
-          <Button variant="ghost" onClick={() => dispatch({ type: 'PREV_STEP' })}>
+          <Button variant="ghost" size="icon" onClick={() => dispatch({ type: 'PREV_STEP' })} className="md:hidden flex-shrink-0" aria-label="上一步">
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
+          <Button variant="ghost" onClick={() => dispatch({ type: 'PREV_STEP' })} className="hidden md:inline-flex">
             <ArrowLeft className="w-4 h-4" />
             上一步
           </Button>
           {done ? (
-            <Button variant="success">
+            <Button variant="success" className="flex-1 md:flex-initial">
               <Download className="w-4 h-4" />
               下载全部视频
             </Button>
           ) : (
-            <Button size="lg" onClick={handleExport} disabled={exporting} className="shadow-lg shadow-[#880E4F]/20">
+            <Button size="lg" onClick={handleExport} disabled={exporting} className="shadow-lg shadow-[#880E4F]/20 flex-1 md:flex-initial">
               <Film className="w-5 h-5" />
               {exporting ? '导出中...' : '导出 MP4'}
             </Button>

@@ -12,6 +12,10 @@ html, body, #root {
   padding: 0;
 }
 
+html, body {
+  overscroll-behavior: none;
+}
+
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background: #0B0D12;
@@ -19,6 +23,24 @@ body {
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hide scrollbars on mobile for app feel */
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+/* Horizontal step strip — hide scrollbar but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 h1, h2, h3 {

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Film, Video, Mic, Type, CheckCircle2, Loader2, ArrowRight, ArrowLeft, RotateCcw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
@@ -33,6 +33,11 @@ export function AutoEdit() {
   const [allGenerating, setAllGenerating] = useState(false)
 
   const allDone = episodes.every(ep => ep.synthesisStatus === 'done')
+  const doneCount = episodes.filter(ep => ep.synthesisStatus === 'done').length
+  const currentlyGenerating = episodes.find(ep => ep.synthesisStatus === 'generating')
+  const currentProgress = currentlyGenerating ? (epProgress[currentlyGenerating.id]?.progress ?? 0) : 0
+  const overallProgress = ((doneCount + (currentlyGenerating ? currentProgress / 100 : 0)) / episodes.length) * 100
+  const isAnyGenerating = !!currentlyGenerating || allGenerating
 
   async function synthesizeEpisode(epId: string) {
     dispatch({ type: 'GENERATE_SYNTHESIS', episodeId: epId, status: 'generating' })
@@ -59,10 +64,45 @@ export function AutoEdit() {
   return (
     <PageLayout title="自动剪辑合成" description="将视频片段、配音、字幕、音效自动合成为完整短剧">
       <div className="flex flex-col h-full">
-        <div className="flex-1 overflow-y-auto p-5">
+        {/* Sticky overall progress — visible while any episode generates */}
+        <AnimatePresence>
+          {isAnyGenerating && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              className="px-4 md:px-5 py-2.5 border-b border-white/[0.04] bg-[#E91E63]/[0.05] flex-shrink-0"
+            >
+              <div className="flex items-center gap-2 mb-1.5">
+                <Loader2 className="w-3.5 h-3.5 text-[#F06292] animate-spin flex-shrink-0" />
+                <span className="text-xs font-medium text-[#F48FB1] flex-shrink-0">
+                  {currentlyGenerating
+                    ? `正在合成第 ${currentlyGenerating.num} 集`
+                    : '准备合成中…'}
+                </span>
+                {currentlyGenerating && epProgress[currentlyGenerating.id]?.phase && (
+                  <span className="text-[12px] text-[#B4B7BE] truncate">· {epProgress[currentlyGenerating.id].phase}</span>
+                )}
+                <span className="ml-auto text-xs font-mono text-[#F48FB1] tabular-nums flex-shrink-0">
+                  {doneCount} / {episodes.length}
+                </span>
+              </div>
+              <Progress value={overallProgress} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {allDone && (
+          <div className="px-4 md:px-5 py-2 border-b border-emerald-500/15 bg-emerald-500/[0.05] flex items-center gap-2 flex-shrink-0">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+            <span className="text-xs text-emerald-300 font-medium">全部剧集合成完成，可以进入预览页</span>
+          </div>
+        )}
+
+        <div className="flex-1 overflow-y-auto p-4 md:p-5">
           {/* Summary */}
           <motion.div
-            className="grid grid-cols-4 gap-3 mb-6"
+            className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-5 md:mb-6"
             variants={gridContainerVariants}
             initial="hidden"
             animate="show"
@@ -95,7 +135,7 @@ export function AutoEdit() {
 
           {/* Episode cards */}
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"
+            className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-4"
             variants={gridContainerVariants}
             initial="hidden"
             animate="show"
@@ -164,8 +204,11 @@ export function AutoEdit() {
 
                     {isDone && (
                       <div className="flex items-center gap-2 py-2 px-3 bg-emerald-500/[0.06] border border-emerald-500/15 rounded-lg mb-4">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                        <span className="text-[13px] text-emerald-300">第 {ep.num} 集合成完成，可以在预览页查看成片</span>
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+                        <span className="text-[13px] text-emerald-300 leading-snug">
+                          <span className="md:hidden">第 {ep.num} 集已合成完成</span>
+                          <span className="hidden md:inline">第 {ep.num} 集合成完成，可以在预览页查看成片</span>
+                        </span>
                       </div>
                     )}
 
@@ -194,16 +237,19 @@ export function AutoEdit() {
         </div>
 
         <ActionBar>
-          <Button variant="ghost" onClick={() => dispatch({ type: 'PREV_STEP' })}>
+          <Button variant="ghost" size="icon" onClick={() => dispatch({ type: 'PREV_STEP' })} className="md:hidden flex-shrink-0" aria-label="上一步">
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
+          <Button variant="ghost" onClick={() => dispatch({ type: 'PREV_STEP' })} className="hidden md:inline-flex">
             <ArrowLeft className="w-4 h-4" />
             上一步
           </Button>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-1 md:flex-initial justify-end">
             <Button variant="secondary" onClick={synthesizeAll} disabled={allGenerating || allDone}>
               <Film className="w-4 h-4" />
-              {allDone ? '全部已合成' : '一键合成全部'}
+              {allDone ? '已合成' : allGenerating ? '合成中' : '一键合成'}
             </Button>
-            <Button onClick={() => dispatch({ type: 'GENERATE_ALL_SYNTHESIS' })} disabled={!allDone}>
+            <Button onClick={() => dispatch({ type: 'GENERATE_ALL_SYNTHESIS' })} disabled={!allDone} className="flex-1 md:flex-initial">
               预览成片
               <ArrowRight className="w-4 h-4" />
             </Button>

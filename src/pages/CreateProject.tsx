@@ -92,25 +92,25 @@ export function CreateProject() {
     <PageLayout title="创建项目" description="填写基础信息，开始你的 AI 短剧创作">
       <div className="flex flex-col h-full">
         <div className="flex-1 overflow-y-auto">
-          <div className="max-w-2xl mx-auto px-6 py-8">
+          <div className="max-w-2xl mx-auto px-4 py-5 md:px-6 md:py-8">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               className="bg-[#12151C] border border-white/[0.06] rounded-2xl overflow-hidden"
             >
-              <div className="p-6 border-b border-white/[0.04]">
+              <div className="p-5 md:p-6 border-b border-white/[0.04]">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#E91E63]/10 border border-[#EC407A]/20 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-[#E91E63]/10 border border-[#EC407A]/20 flex items-center justify-center flex-shrink-0">
                     <FolderOpen className="w-5 h-5 text-[#F06292]" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <h3 className="text-sm font-semibold text-[#EDEEF0]">新建短剧项目</h3>
-                    <p className="text-xs text-[#B4B7BE] mt-0.5">所有字段均有默认推荐值，可直接点击创建</p>
+                    <p className="text-[12px] md:text-xs text-[#B4B7BE] mt-0.5 leading-snug">所有字段均有默认推荐值，可直接点击创建</p>
                   </div>
                 </div>
               </div>
 
-              <div className="p-6 space-y-6">
+              <div className="p-5 md:p-6 space-y-5 md:space-y-6">
                 {fields.map((field, i) => (
                   <motion.div
                     key={field.label}
@@ -118,10 +118,10 @@ export function CreateProject() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.06 }}
                   >
-                    <div className="flex items-start gap-6">
-                      <div className="w-24 flex-shrink-0 pt-2">
+                    <div className="flex flex-col md:flex-row md:items-start gap-1.5 md:gap-6">
+                      <div className="md:w-24 md:flex-shrink-0 md:pt-2">
                         <Label className="text-[#D2D5DB]">{field.label}</Label>
-                        <p className="text-[12px] text-[#444488] mt-0.5 leading-snug">{field.desc}</p>
+                        <p className="text-[12px] text-[#5E6068] md:text-[#444488] mt-0.5 leading-snug">{field.desc}</p>
                       </div>
                       <div className="flex-1">{field.node}</div>
                     </div>
@@ -130,7 +130,7 @@ export function CreateProject() {
               </div>
 
               {/* Preview */}
-              <div className="mx-6 mb-6 bg-[#0d0d22] border border-white/[0.04] rounded-xl p-4">
+              <div className="mx-5 md:mx-6 mb-5 md:mb-6 bg-[#0d0d22] border border-white/[0.04] rounded-xl p-4">
                 <p className="text-[12px] text-[#5E6068] uppercase tracking-widest mb-3 font-medium">项目预览</p>
                 <div className="grid grid-cols-2 gap-3">
                   {[
@@ -153,8 +153,8 @@ export function CreateProject() {
         </div>
 
         <ActionBar>
-          <span />
-          <Button size="lg" onClick={handleCreate} disabled={!form.name.trim()}>
+          <span className="hidden md:block" />
+          <Button size="lg" onClick={handleCreate} disabled={!form.name.trim()} className="w-full md:w-auto">
             创建项目
             <ArrowRight className="w-4 h-4" />
           </Button>

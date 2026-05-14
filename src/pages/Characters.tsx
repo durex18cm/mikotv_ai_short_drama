@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Check, Edit3, RotateCcw, ArrowRight, ArrowLeft, Users, Volume2 } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Check, Edit3, RotateCcw, ArrowRight, ArrowLeft, Users, Volume2, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -13,11 +13,18 @@ import {
 } from '@/components/ui/dialog'
 import { PageLayout, ActionBar } from '@/components/layout/AppShell'
 import { CharacterAvatar } from '@/components/shared/ImagePlaceholder'
+import { Progress } from '@/components/ui/progress'
 import { useApp } from '@/context/AppContext'
 import { getCharacterImageUrl, getCharacterAvatarPosition } from '@/data/mockData'
 import type { Character } from '@/types'
-import { cn } from '@/lib/utils'
+import { cn, sleep } from '@/lib/utils'
 import { gridContainerVariants, gridItemVariants } from '@/lib/animations'
+
+const REGEN_PHASES = [
+  '清空已确认状态…',
+  '基于剧本重新提取角色…',
+  '生成最新角色设定…',
+]
 
 function CharacterCard({
   character,
@@ -197,10 +204,34 @@ export function Characters() {
   const { state, dispatch } = useApp()
   const { characters } = state
   const [editTarget, setEditTarget] = useState<Character | null>(null)
+  const [regenerating, setRegenerating] = useState(false)
+  const [regenPhase, setRegenPhase] = useState(0)
+  const [regenProgress, setRegenProgress] = useState(0)
   const confirmedCount = characters.filter(c => c.confirmed).length
 
   function confirmAll() {
     dispatch({ type: 'CONFIRM_CHARACTERS' })
+  }
+
+  async function handleRegenerate() {
+    if (regenerating) return
+    setRegenerating(true)
+    setRegenPhase(0)
+    setRegenProgress(0)
+    // Clear confirmed state immediately for visible change
+    characters.forEach(c => dispatch({ type: 'UPDATE_CHARACTER', character: { ...c, confirmed: false } }))
+    const total = 2000
+    const stepMs = total / REGEN_PHASES.length
+    for (let i = 0; i < REGEN_PHASES.length; i++) {
+      setRegenPhase(i)
+      const ticks = 10
+      for (let k = 1; k <= ticks; k++) {
+        await sleep(stepMs / ticks)
+        setRegenProgress(((i + k / ticks) / REGEN_PHASES.length) * 100)
+      }
+    }
+    setRegenProgress(100)
+    setRegenerating(false)
   }
 
   return (
@@ -208,17 +239,61 @@ export function Characters() {
       title="确认角色"
       description="AI 已自动识别角色并生成设定，确认后将用于所有镜头生成"
     >
-      <div className="flex flex-col h-full">
+      <div className="flex flex-col h-full relative">
+        <AnimatePresence>
+          {regenerating && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 z-20 bg-[#0B0D12]/85 backdrop-blur-sm flex items-center justify-center px-6"
+            >
+              <div className="w-full max-w-md">
+                <div className="flex flex-col items-center text-center gap-4 mb-6">
+                  <div className="relative">
+                    <div className="absolute inset-0 rounded-full bg-[#E91E63]/30 blur-2xl animate-pulse" />
+                    <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-[#E91E63] to-[#9C27B0] flex items-center justify-center shadow-xl shadow-[#880E4F]/40">
+                      <Loader2 className="w-6 h-6 text-white animate-spin" />
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-[#EDEEF0]">正在重新生成角色</p>
+                    <p className="text-[12px] text-[#8B8E96] mt-1">AI 将基于剧本重新提取并设定角色</p>
+                  </div>
+                </div>
+                <Progress value={regenProgress} className="mb-4" />
+                <div className="space-y-2">
+                  {REGEN_PHASES.map((p, i) => {
+                    const done = i < regenPhase
+                    const active = i === regenPhase
+                    return (
+                      <div key={p} className={cn('flex items-center gap-2 text-xs transition-opacity', done || active ? 'opacity-100' : 'opacity-40')}>
+                        <span className={cn(
+                          'w-4 h-4 rounded flex items-center justify-center flex-shrink-0',
+                          done ? 'bg-emerald-500/15 text-emerald-400' : active ? 'bg-[#E91E63]/20 text-[#F06292]' : 'bg-white/[0.04] text-[#5E6068]'
+                        )}>
+                          <span className={cn('w-1 h-1 rounded-full', done ? 'bg-emerald-400' : active ? 'bg-[#EC407A] animate-pulse' : 'bg-[#5E6068]')} />
+                        </span>
+                        <span className={active ? 'text-[#F48FB1] font-medium' : 'text-[#B4B7BE]'}>{p}</span>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <div className="flex-1 overflow-y-auto">
-          <div className="px-5 py-4">
+          <div className="px-4 md:px-5 py-4">
             {/* Stats bar */}
-            <div className="flex items-center gap-4 mb-5 p-3 bg-[#0F1219] border border-white/[0.04] rounded-xl">
-              <Users className="w-4 h-4 text-[#B4B7BE]" />
-              <span className="text-xs text-[#B4B7BE]">共识别到 {characters.length} 个角色</span>
+            <div className="flex items-center gap-2 md:gap-4 mb-4 md:mb-5 p-3 bg-[#0F1219] border border-white/[0.04] rounded-xl">
+              <Users className="w-4 h-4 text-[#B4B7BE] flex-shrink-0" />
+              <span className="text-xs text-[#B4B7BE] flex-shrink-0">{characters.length} 个角色</span>
               <span className="flex-1" />
-              <span className="text-xs text-[#EDEEF0] font-medium">{confirmedCount}</span>
-              <span className="text-xs text-[#B4B7BE]">/ {characters.length} 已确认</span>
-              <div className="w-24 h-1 bg-white/[0.06] rounded-full overflow-hidden">
+              <span className="text-xs text-[#EDEEF0] font-medium flex-shrink-0">{confirmedCount}</span>
+              <span className="text-xs text-[#B4B7BE] flex-shrink-0">/ {characters.length} 已确认</span>
+              <div className="w-16 md:w-24 h-1 bg-white/[0.06] rounded-full overflow-hidden flex-shrink-0">
                 <motion.div
                   className="h-full bg-emerald-500 rounded-full"
                   animate={{ width: `${(confirmedCount / characters.length) * 100}%` }}
@@ -253,20 +328,21 @@ export function Characters() {
         </div>
 
         <ActionBar>
-          <Button variant="ghost" onClick={() => dispatch({ type: 'PREV_STEP' })}>
+          <Button variant="ghost" size="icon" onClick={() => dispatch({ type: 'PREV_STEP' })} disabled={regenerating} className="md:hidden flex-shrink-0" aria-label="上一步">
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
+          <Button variant="ghost" onClick={() => dispatch({ type: 'PREV_STEP' })} disabled={regenerating} className="hidden md:inline-flex">
             <ArrowLeft className="w-4 h-4" />
             上一步
           </Button>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="secondary"
-              onClick={() => characters.forEach(c => dispatch({ type: 'UPDATE_CHARACTER', character: { ...c, confirmed: false } }))}
-            >
-              <RotateCcw className="w-4 h-4" />
-              重新生成
+          <div className="flex items-center gap-2 flex-1 md:flex-initial justify-end">
+            <Button variant="secondary" onClick={handleRegenerate} disabled={regenerating}>
+              <RotateCcw className={cn('w-4 h-4', regenerating && 'animate-spin')} />
+              {regenerating ? '生成中' : '重新生成'}
             </Button>
-            <Button onClick={confirmAll}>
-              确认全部角色
+            <Button onClick={confirmAll} disabled={regenerating} className="flex-1 md:flex-initial">
+              <span className="md:hidden">确认全部</span>
+              <span className="hidden md:inline">确认全部角色</span>
               <ArrowRight className="w-4 h-4" />
             </Button>
           </div>

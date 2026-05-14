@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Layout, ArrowRight, ArrowLeft, Edit3, RotateCcw, Loader2 } from 'lucide-react'
+import { Layout, ArrowRight, ArrowLeft, Edit3, RotateCcw, Loader2, ListTree, Film, Info } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Textarea } from '@/components/ui/textarea'
@@ -22,6 +22,7 @@ export function Storyboard() {
   const [generating, setGenerating] = useState(false)
   const [progress, setProgress] = useState(0)
   const [generated, setGenerated] = useState(state.storyboardGenerated)
+  const [mobileTab, setMobileTab] = useState<'nav' | 'shots' | 'detail'>('shots')
 
   const shots = MOCK_SHOTS.filter(s => s.episodeId === selectedEp)
   const eps = MOCK_EPISODES
@@ -45,16 +46,43 @@ export function Storyboard() {
     <PageLayout title="生成分镜" description="基于剧本解析、角色设定和视觉风格，自动生成完整分镜表">
       <div className="flex flex-col h-full">
         {generating && (
-          <div className="px-5 py-2 border-b border-white/[0.04] flex items-center gap-3 flex-shrink-0 bg-[#E91E63]/[0.04]">
-            <Loader2 className="w-3.5 h-3.5 text-[#F06292] animate-spin" />
-            <span className="text-xs text-[#F48FB1]">正在生成分镜表...</span>
+          <div className="px-4 md:px-5 py-2 border-b border-white/[0.04] flex items-center gap-3 flex-shrink-0 bg-[#E91E63]/[0.04]">
+            <Loader2 className="w-3.5 h-3.5 text-[#F06292] animate-spin flex-shrink-0" />
+            <span className="text-xs text-[#F48FB1] flex-shrink-0">生成分镜表...</span>
             <Progress value={progress} className="flex-1 max-w-xs" />
           </div>
         )}
 
-        <div className="flex-1 overflow-hidden grid grid-cols-[160px_1fr_280px] divide-x divide-white/[0.04]">
+        {/* Mobile tab nav */}
+        <div className="md:hidden flex items-center px-2 py-1.5 border-b border-white/[0.04] flex-shrink-0 gap-1">
+          {[
+            { id: 'nav' as const, label: '剧集', icon: ListTree },
+            { id: 'shots' as const, label: `镜头 (${shots.length})`, icon: Film },
+            { id: 'detail' as const, label: '详情', icon: Info },
+          ].map(t => (
+            <button
+              key={t.id}
+              onClick={() => setMobileTab(t.id)}
+              className={cn(
+                'flex-1 flex items-center justify-center gap-1.5 h-9 rounded-md text-[13px] font-medium transition-colors',
+                mobileTab === t.id
+                  ? 'bg-[#E91E63]/[0.12] text-[#F48FB1]'
+                  : 'text-[#B4B7BE] hover:bg-white/[0.04]'
+              )}
+            >
+              <t.icon className="w-3.5 h-3.5" />
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex-1 overflow-hidden md:grid md:grid-cols-[160px_1fr_280px] md:divide-x md:divide-white/[0.04]">
           {/* Episode nav */}
-          <div className="overflow-y-auto py-3 px-2 space-y-0.5">
+          <div className={cn(
+            'overflow-y-auto py-3 px-2 space-y-0.5 h-full',
+            'md:block',
+            mobileTab === 'nav' ? 'block' : 'hidden'
+          )}>
             {eps.map(ep => (
               <button
                 key={ep.id}
@@ -73,9 +101,53 @@ export function Storyboard() {
             ))}
           </div>
 
-          {/* Shot table */}
-          <div className="overflow-y-auto">
-            <table className="w-full text-xs">
+          {/* Shot list — desktop table + mobile cards */}
+          <div className={cn(
+            'overflow-y-auto h-full',
+            'md:block',
+            mobileTab === 'shots' ? 'block' : 'hidden'
+          )}>
+            {/* Mobile cards */}
+            <motion.div
+              className="md:hidden p-3 space-y-2"
+              variants={gridContainerVariants}
+              initial="hidden"
+              animate="show"
+            >
+              {shots.map(shot => (
+                <motion.button
+                  key={shot.id}
+                  variants={listItemVariants}
+                  onClick={() => {
+                    setSelectedShot(shot)
+                    setEditDesc(shot.description)
+                    setEditing(false)
+                    setMobileTab('detail')
+                  }}
+                  className={cn(
+                    'w-full text-left rounded-lg border p-3 transition-colors',
+                    selectedShot.id === shot.id
+                      ? 'bg-[#E91E63]/[0.08] border-[#EC407A]/30'
+                      : 'bg-white/[0.02] border-white/[0.05]'
+                  )}
+                >
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-[12px] font-mono text-[#B4B7BE]">SHOT {String(shot.num).padStart(2, '0')}</span>
+                    <Badge variant="muted">{shot.type}</Badge>
+                  </div>
+                  <p className="text-xs text-[#EDEEF0] leading-snug line-clamp-2 mb-1">{shot.description}</p>
+                  {(shot.dialogue || shot.narrator) && (
+                    <p className="text-[12px] text-[#B4B7BE] italic line-clamp-1">
+                      {shot.dialogue ? `"${shot.dialogue}"` : shot.narrator}
+                    </p>
+                  )}
+                  <div className="text-[12px] text-[#5E6068] mt-1">{shot.duration}s</div>
+                </motion.button>
+              ))}
+            </motion.div>
+
+            {/* Desktop table */}
+            <table className="hidden md:table w-full text-xs">
               <thead className="sticky top-0 bg-[#0e0e1e] border-b border-white/[0.04]">
                 <tr>
                   {['镜头', '画面描述', '台词/旁白', '时长', '类型', '操作'].map(h => (
@@ -132,7 +204,11 @@ export function Storyboard() {
           </div>
 
           {/* Detail panel */}
-          <div className="overflow-y-auto p-4 space-y-4 bg-[#0F1219]/40">
+          <div className={cn(
+            'overflow-y-auto p-4 space-y-4 bg-[#0F1219]/40 h-full',
+            'md:block',
+            mobileTab === 'detail' ? 'block' : 'hidden'
+          )}>
             <div className="flex items-center justify-between">
               <p className="text-[12px] text-[#5E6068] uppercase tracking-widest font-medium">镜头详情</p>
               <span className="text-[13px] text-[#B4B7BE] font-mono">
@@ -193,17 +269,21 @@ export function Storyboard() {
         </div>
 
         <ActionBar>
-          <Button variant="ghost" onClick={() => dispatch({ type: 'PREV_STEP' })}>
+          <Button variant="ghost" size="icon" onClick={() => dispatch({ type: 'PREV_STEP' })} className="md:hidden flex-shrink-0" aria-label="上一步">
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
+          <Button variant="ghost" onClick={() => dispatch({ type: 'PREV_STEP' })} className="hidden md:inline-flex">
             <ArrowLeft className="w-4 h-4" />
             上一步
           </Button>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-1 md:flex-initial justify-end">
             <Button variant="secondary" onClick={handleGenerate} disabled={generating}>
               <Layout className="w-4 h-4" />
-              {generating ? '生成中...' : generated ? '重新生成分镜' : '生成分镜'}
+              {generating ? '生成中' : generated ? '重新生成' : '生成分镜'}
             </Button>
-            <Button onClick={handleNext} disabled={!generated}>
-              确认分镜，生成关键帧
+            <Button onClick={handleNext} disabled={!generated} className="flex-1 md:flex-initial">
+              <span className="md:hidden">确认分镜</span>
+              <span className="hidden md:inline">确认分镜，生成关键帧</span>
               <ArrowRight className="w-4 h-4" />
             </Button>
           </div>

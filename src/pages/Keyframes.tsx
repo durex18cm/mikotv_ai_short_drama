@@ -25,7 +25,16 @@ export function Keyframes() {
 
   async function generateAll() {
     setGenerating(true)
-    const pending = shots.filter(s => s.keyframeStatus === 'idle' || s.keyframeStatus === 'failed')
+    // If everything already finished, treat as 重新生成: reset all to idle first so the user sees fresh progress
+    if (allDone) {
+      for (const shot of shots) {
+        dispatch({ type: 'UPDATE_SHOT_KEYFRAME', shotId: shot.id, status: 'idle' })
+      }
+      await sleep(200)
+    }
+    const pending = shots.filter(s =>
+      s.keyframeStatus === 'idle' || s.keyframeStatus === 'failed' || allDone
+    )
     for (const shot of pending) {
       dispatch({ type: 'UPDATE_SHOT_KEYFRAME', shotId: shot.id, status: 'generating' })
       await sleep(400)
@@ -52,14 +61,14 @@ export function Keyframes() {
     <PageLayout title="生成关键帧" description="为每个镜头生成关键画面，确认满意后锁定，用于视频生成">
       <div className="flex flex-col h-full">
         {/* Top bar */}
-        <div className="px-5 py-2.5 border-b border-white/[0.04] flex items-center gap-4 flex-shrink-0">
-          <div className="flex gap-1">
+        <div className="px-4 md:px-5 py-2 md:py-2.5 border-b border-white/[0.04] flex items-center gap-2 md:gap-4 flex-shrink-0 overflow-x-auto no-scrollbar">
+          <div className="flex gap-1 flex-shrink-0">
             {MOCK_EPISODES.map(ep => (
               <button
                 key={ep.id}
                 onClick={() => setSelectedEp(ep.id)}
                 className={cn(
-                  'px-3 py-1.5 rounded-md text-xs font-medium transition-all',
+                  'px-3 py-1.5 rounded-md text-xs font-medium transition-all whitespace-nowrap',
                   selectedEp === ep.id
                     ? 'bg-[#E91E63]/20 text-[#F48FB1]'
                     : 'text-[#B4B7BE] hover:text-[#D2D5DB]'
@@ -70,7 +79,7 @@ export function Keyframes() {
             ))}
           </div>
           <div className="flex-1" />
-          <div className="text-xs text-[#B4B7BE]">
+          <div className="text-xs text-[#B4B7BE] whitespace-nowrap flex-shrink-0">
             {doneCount} / {shots.length} 已生成
           </div>
           {!generating && (
@@ -78,23 +87,38 @@ export function Keyframes() {
               variant="secondary"
               size="sm"
               onClick={generateAll}
-              disabled={allDone}
+              className="hidden md:inline-flex flex-shrink-0"
             >
               <Image className="w-3.5 h-3.5" />
-              {allDone ? '已全部生成' : '生成全部关键帧'}
+              {allDone ? '重新生成全部' : '生成全部关键帧'}
             </Button>
           )}
           {generating && (
-            <div className="flex items-center gap-2 text-xs text-[#F48FB1]">
+            <div className="hidden md:flex items-center gap-2 text-xs text-[#F48FB1] flex-shrink-0">
               <Loader2 className="w-3.5 h-3.5 animate-spin" />
               正在批量生成...
             </div>
           )}
         </div>
 
-        <div className="flex-1 overflow-y-auto p-5">
+        {/* Mobile generating progress strip */}
+        {generating && (
+          <div className="md:hidden px-4 py-2 border-b border-white/[0.04] bg-[#E91E63]/[0.04] flex items-center gap-2 flex-shrink-0">
+            <Loader2 className="w-3.5 h-3.5 text-[#F06292] animate-spin flex-shrink-0" />
+            <span className="text-xs text-[#F48FB1] flex-shrink-0">正在批量生成…</span>
+            <div className="flex-1 h-1 bg-white/[0.06] rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-[#EC4899]"
+                animate={{ width: `${(doneCount / shots.length) * 100}%` }}
+                transition={{ duration: 0.3 }}
+              />
+            </div>
+          </div>
+        )}
+
+        <div className="flex-1 overflow-y-auto p-4 md:p-5">
           <motion.div
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4"
             variants={gridContainerVariants}
             initial="hidden"
             animate="show"
@@ -245,14 +269,24 @@ export function Keyframes() {
         </AnimatePresence>
 
         <ActionBar>
-          <Button variant="ghost" onClick={() => dispatch({ type: 'PREV_STEP' })}>
+          <Button variant="ghost" size="icon" onClick={() => dispatch({ type: 'PREV_STEP' })} disabled={generating} className="md:hidden flex-shrink-0" aria-label="上一步">
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
+          <Button variant="ghost" onClick={() => dispatch({ type: 'PREV_STEP' })} disabled={generating} className="hidden md:inline-flex">
             <ArrowLeft className="w-4 h-4" />
             上一步
           </Button>
-          <Button onClick={() => dispatch({ type: 'GENERATE_KEYFRAMES' })} disabled={!allDone}>
-            关键帧已确认，生成视频
-            <ArrowRight className="w-4 h-4" />
-          </Button>
+          <div className="flex items-center gap-2 flex-1 md:flex-initial justify-end">
+            <Button variant="secondary" onClick={generateAll} disabled={generating} className="md:hidden">
+              <Image className="w-4 h-4" />
+              {generating ? '生成中' : allDone ? '重新生成' : '生成全部'}
+            </Button>
+            <Button onClick={() => dispatch({ type: 'GENERATE_KEYFRAMES' })} disabled={!allDone || generating} className="flex-1 md:flex-initial">
+              <span className="md:hidden">下一步：生成视频</span>
+              <span className="hidden md:inline">关键帧已确认，生成视频</span>
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          </div>
         </ActionBar>
       </div>
     </PageLayout>
