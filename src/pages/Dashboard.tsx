@@ -92,10 +92,10 @@ export function Dashboard() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E91E63]/10 border border-[#EC407A]/20 mb-6">
             <Sparkles className="w-3.5 h-3.5 text-[#F06292]" />
-            <span className="text-xs text-[#F48FB1] font-medium">AI 驱动的短剧创作平台</span>
+            <span className="text-xs text-[#F48FB1] font-medium">AI 驱动的一键短剧创作平台</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-3 tracking-tight hero-gradient">
-            AI 一键创作
+            创意进，短剧出
           </h1>
           <p className="text-[#B4B7BE] text-base max-w-md mx-auto leading-relaxed">
             上传图片、创意，自动解析出大纲、剧本、分镜头、成片

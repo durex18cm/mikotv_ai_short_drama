@@ -130,7 +130,7 @@ export function CreateProject() {
               </div>
 
               {/* Preview */}
-              <div className="mx-5 md:mx-6 mb-5 md:mb-6 bg-[#0d0d22] border border-white/[0.04] rounded-xl p-4">
+              <div className="mx-5 md:mx-6 mb-5 md:mb-6 bg-[#181B24] border border-white/[0.06] rounded-xl p-4">
                 <p className="text-[12px] text-[#5E6068] uppercase tracking-widest mb-3 font-medium">项目预览</p>
                 <div className="grid grid-cols-2 gap-3">
                   {[
